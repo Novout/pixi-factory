@@ -4,7 +4,7 @@
 
 A superset for creating and handling Pixi.js resources
 
-- [Documentation is here](https://pixi-controller.vercel.app/)
+- [Documentation is here](https://pixi-factory.vercel.app/)
 
 ## TODO
 
