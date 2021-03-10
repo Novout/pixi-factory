@@ -26,6 +26,8 @@ export interface PIXISpriteVelocity {
   movement: boolean;
   x: number;
   y: number;
+  setVelocity: (sprite: PIXISprite, value: number) => void;
+  setMovement: (sprite: PIXISprite) => void;
 }
 
 export interface PIXISpriteOptions {

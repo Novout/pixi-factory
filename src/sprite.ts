@@ -158,6 +158,13 @@ export class PSprite {
         movement: true, // boolean for lock sprite movement
         x: 1, // vx
         y: 1, // vy
+        setVelocity: (__sprite: PIXISprite, value: number) => {
+          __sprite!.velocity!.x = value;
+          __sprite!.velocity!.y = value;
+        },
+        setMovement: (__sprite: PIXISprite) => {
+          __sprite!.velocity!.movement = !__sprite!.velocity!.movement;
+        },
       };
 
       this._sprite._velocityPropertiesAdded = true;

@@ -147,6 +147,64 @@ describe('Factory.Sprite', () => {
     });
   });
 
+  it('should set new velocity in generic sprite', () => {
+    const sprite = Factory.Sprite.createGenericSprite(
+      { foo: 'bar' },
+      {
+        bump: false,
+        velocity: true,
+        d20rpg: false,
+      },
+    );
+    sprite.velocity.setVelocity(sprite, 5);
+
+    expect(sprite.velocity.x).toBe(5);
+    expect(sprite.velocity.y).toBe(5);
+  });
+
+  it('should set wrong new velocity in generic sprite', () => {
+    const sprite = Factory.Sprite.createGenericSprite(
+      { foo: 'bar' },
+      {
+        bump: false,
+        velocity: true,
+        d20rpg: false,
+      },
+    );
+    sprite.velocity.setVelocity(sprite, 5);
+
+    expect(sprite.velocity.x).not.toBe(1);
+    expect(sprite.velocity.y).not.toBe(1);
+  });
+
+  it('should set new movement in generic sprite', () => {
+    const sprite = Factory.Sprite.createGenericSprite(
+      { foo: 'bar' },
+      {
+        bump: false,
+        velocity: true,
+        d20rpg: false,
+      },
+    );
+    sprite.velocity.setMovement(sprite);
+
+    expect(sprite.velocity.movement).toBe(false);
+  });
+
+  it('should set wrong new movement in generic sprite', () => {
+    const sprite = Factory.Sprite.createGenericSprite(
+      { foo: 'bar' },
+      {
+        bump: false,
+        velocity: true,
+        d20rpg: false,
+      },
+    );
+    sprite.velocity.setMovement(sprite);
+
+    expect(sprite.velocity.movement).not.toBe(true);
+  });
+
   it('should exists factory specific sprite with PSprite instance', () => {
     const sprite = new PSprite().createSpecificSprite({ name: 'guest001' }, { foo: 'bar' });
 
