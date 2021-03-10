@@ -211,7 +211,6 @@ export class PSprite {
           charmed_value: 0,
           stunned_value: 0,
           bruised_value: 0,
-          imortal_value: 0,
         },
         action: {
           attack: false,
@@ -237,7 +236,9 @@ export class PSprite {
             magic_slot: 4,
           },
         },
-        inventory: [],
+        inventory: {
+          base: [],
+        },
       } as PIXISpriteOpenRPG;
 
       this._sprite._d20RPGPropertiesAdded = true;
