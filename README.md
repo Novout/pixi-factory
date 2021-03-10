@@ -25,7 +25,7 @@ const app = new PIXI.Application();
 document.body.appendChild(app.view);
 
 app.loader.add('example', 'example.jpg').load((loader, resources) => {
-  const example = Factory.Sprite.createSprite(new PIXI.Sprite(resources.example.texture), {
+  const example = Factory.Sprite.createGenericSprite(new PIXI.Sprite(resources.example.texture), {
     bump: true, // hability a collision properties
     velocity: true, // hability a velocity base content
     d20rpg: true, // hability a standard d20 rpg
@@ -67,7 +67,7 @@ The internal methods are also generic, waiting to receive the sprite that is bei
 import * as PIXI from 'pixi.js';
 import Factory, { Utils } from 'pixi-factory';
 
-const example = Factory.Sprite.createSprite(new PIXI.Sprite(resources.example.texture), {
+const example = Factory.Sprite.createGenericSprite(new PIXI.Sprite(resources.example.texture), {
   bump: true,
   velocity: true,
   d20rpg: true,
