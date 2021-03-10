@@ -96,9 +96,9 @@ const sprite: Utils.PIXISprite = Factory.Sprite.createGenericSprite(example, {
   velocity: true,
   d20rpg: true
 });
+```
 
 > We recommend that you use `"strictNullChecks": false` in `tsconfig.json` if you are using `Typescript` in your project.
-```
 
 ## FAQ
 
