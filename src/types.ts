@@ -135,11 +135,6 @@ export interface PIXISpriteOptions {
  * A content for generic d20 system
  *
  * @type {Interface}
- * @property {PIXISpriteOpenRPGLife} life - A life contents
- * @property {PIXISpriteOpenRPGArmor} armor - A armor contents
- * @property {PIXISpriteOpenRPGResistance} resistance - A resistance contents
- * @property {PIXISpriteOpenRPGAction} action - A action contents
- * @property {PIXISpriteOpenRPGInventory} inventory - A generic inventory contents
  */
 export interface PIXISpriteOpenRPG {
   life: PIXISpriteOpenRPGLife;
@@ -153,10 +148,6 @@ export interface PIXISpriteOpenRPG {
  * A life implement
  *
  * @type {Interface}
- * @property {number} HP - a hp value for sprite
- * @property {number} minHP - a minimal hp value
- * @property {number} maxHP - a max hp value
- * @property {number} temporaryHP - a optional temporary hp
  */
 export interface PIXISpriteOpenRPGLife {
   HP: number;
@@ -169,10 +160,6 @@ export interface PIXISpriteOpenRPGLife {
  * A CA implement
  *
  * @type {Interface}
- * @property {number} CA - a class armor value for sprite
- * @property {number} minCA - a minimal class armor value
- * @property {number} maxCA - a max class armor value
- * @property {number} temporaryCA - a optional temporary class armor
  */
 export interface PIXISpriteOpenRPGArmor {
   CA: number;
@@ -185,21 +172,6 @@ export interface PIXISpriteOpenRPGArmor {
  * A resistance and tick damage implement
  *
  * @type {Interface}
- * @property {boolean} poisoning - a poisoning status
- * @property {boolean} bleeding - a bleeding status
- * @property {boolean} freezing - a freezing status
- * @property {boolean} burning - a burning status
- * @property {boolean} charmed - a charmed status
- * @property {boolean} stunned - a stunned status
- * @property {boolean} bruised - a bruised status
- * @property {boolean} imortal - a imortal status
- * @property {number} poisoning_value - a poisoning damage value
- * @property {number} bleeding_value - a bleeding damage value
- * @property {number} freezing_value - a freezing damage value
- * @property {number} burning_value - a burning damage value
- * @property {number} charmed_value - a charmed damage value
- * @property {number} stunned_value - a stunned damage value
- * @property {number} bruised_value - a bruised damage value
  */
 export interface PIXISpriteOpenRPGResistance {
   poisoning: boolean;
@@ -223,18 +195,6 @@ export interface PIXISpriteOpenRPGResistance {
  * A actions implement (attack, distance, interactive, magic)
  *
  * @type {Interface}
- * @property {boolean} attack - Boolean to check if the sprite is attacking (melee) or not
- * @property {number} attack_time - Increment in a tick time if a attack `true`
- * @property {boolean} attack_hit - for a colission set `true` for enemy receive damage
- * @property {number} attack_velocity - for a animated sprite time
- * @property {boolean} distance - Boolean to check if the sprite is attacking (distance) or not
- * @property {boolean} distance_time - Increment in a tick time if a distance `true`
- * @property {boolean} distance_hit - for a colission set `true` for enemy receive damage
- * @property {boolean} interactive_inventory - `true` in open inventory
- * @property {number} interactive_ui - `true` in a generic interactive ui
- * @property {number} interactive_item - `true` in a generic interactive item
- * @property {PIXISpriteOpenRPGActionPosition} position - position in center camera
- * @property {PIXISpriteOpenRPGActionMagic} magic - a magic utilities
  */
 export interface PIXISpriteOpenRPGAction {
   attack: boolean;
@@ -255,9 +215,6 @@ export interface PIXISpriteOpenRPGAction {
  * A actions implement (attack, distance, interactive, magic)
  *
  * @type {Interface}
- * @property {string | number} x - A x camera direction for random utils(interactive sound, invert sprite, etc..)
- * @property {string | number} y - A y camera direction for random utils(interactive sound, invert sprite, etc..)
- * @property {boolean} area - A area specific utils for a sprite size
  */
 export interface PIXISpriteOpenRPGActionPosition {
   x: string | number;
@@ -269,11 +226,6 @@ export interface PIXISpriteOpenRPGActionPosition {
  * A magic content implement
  *
  * @type {Interface}
- * @property {boolean} magic - Sprite is a magic conjurer
- * @property {boolean} magic_hit - A magic hit other sprite
- * @property {number} magic_velocity - A target magic with time to hit enemy
- * @property {number} magic_slot_max - A max slot magic's
- * @property {number} magic_slot - A actual magic slots
  */
 export interface PIXISpriteOpenRPGActionMagic {
   magic: boolean;
@@ -287,8 +239,8 @@ export interface PIXISpriteOpenRPGActionMagic {
  * A inventory content implement
  *
  * @type {Interface}
- * @property {Array<any>} base - A generic array with items for render/interactive
  */
 export interface PIXISpriteOpenRPGInventory {
+  /** A generic array with items for render/interactive */
   base: Array<any>;
 }
