@@ -4,8 +4,7 @@
 
 //@ts-ignore
 import * as PIXI from 'pixi.js';
-import Factory, { PSprite } from '../src/index';
-import { PIXISprite, Maybe } from '../src/types';
+import Factory, { PSprite, Utils } from '../src/index';
 
 describe('Factory.Sprite', () => {
   beforeEach(() => {
@@ -13,7 +12,7 @@ describe('Factory.Sprite', () => {
   });
 
   it('should exists factory sprite', () => {
-    const sprite = Factory.Sprite.createGenericSprite(
+    const sprite: Utils.PIXISprite = Factory.Sprite.createGenericSprite(
       { foo: 'bar' },
       {
         bump: true,
@@ -32,7 +31,7 @@ describe('Factory.Sprite', () => {
     app.loader.add('example', '_.jpg').load((loader, resources) => {
       const example = new PIXI.Sprite(resources['example']!.texture);
 
-      const sprite = Factory.Sprite.createGenericSprite(example, {
+      const sprite: Utils.PIXISprite = Factory.Sprite.createGenericSprite(example, {
         bump: true,
         velocity: true,
         d20rpg: true,
@@ -43,7 +42,7 @@ describe('Factory.Sprite', () => {
   });
 
   it('should exists factory sprite with PSprite instance', () => {
-    const sprite = new PSprite().createGenericSprite(
+    const sprite: Utils.PIXISprite = new PSprite().createGenericSprite(
       { foo: 'bar' },
       {
         bump: true,
@@ -62,7 +61,7 @@ describe('Factory.Sprite', () => {
     app.loader.add('example', '_.jpg').load((loader, resources) => {
       const example = new PIXI.Sprite(resources['example']!.texture);
 
-      const sprite = new PSprite().createGenericSprite(example, {
+      const sprite: Utils.PIXISprite = new PSprite().createGenericSprite(example, {
         bump: true,
         velocity: true,
         d20rpg: true,
@@ -76,7 +75,7 @@ describe('Factory.Sprite', () => {
     const app = new PIXI.Application();
     document.body.appendChild(app.view);
 
-    let _sprite: Maybe<PIXISprite>;
+    let _sprite: Utils.Maybe<Utils.PIXISprite>;
 
     Promise.resolve(
       app.loader.add('example', '_.jpg').load((loader, resources) => {
@@ -84,7 +83,7 @@ describe('Factory.Sprite', () => {
 
         app.stage.addChild(example);
 
-        const sprite = Factory.Sprite.createGenericSprite(example, {
+        const sprite: Utils.PIXISprite = Factory.Sprite.createGenericSprite(example, {
           bump: true,
           velocity: false,
           d20rpg: false,
@@ -93,7 +92,7 @@ describe('Factory.Sprite', () => {
         _sprite = sprite;
       }),
     ).then(() => {
-      expect(_sprite as PIXISprite).toHaveProperty('_bumpPropertiesAdded');
+      expect(_sprite as Utils.PIXISprite).toHaveProperty('_bumpPropertiesAdded');
     });
   });
 
@@ -101,7 +100,7 @@ describe('Factory.Sprite', () => {
     const app = new PIXI.Application();
     document.body.appendChild(app.view);
 
-    let _sprite: Maybe<PIXISprite>;
+    let _sprite: Utils.Maybe<Utils.PIXISprite>;
 
     Promise.resolve(
       app.loader.add('example', '_.jpg').load((loader, resources) => {
@@ -109,7 +108,7 @@ describe('Factory.Sprite', () => {
 
         app.stage.addChild(example);
 
-        const sprite = Factory.Sprite.createGenericSprite(example, {
+        const sprite: Utils.PIXISprite = Factory.Sprite.createGenericSprite(example, {
           bump: false,
           velocity: true,
           d20rpg: false,
@@ -118,7 +117,7 @@ describe('Factory.Sprite', () => {
         _sprite = sprite;
       }),
     ).then(() => {
-      expect(_sprite as PIXISprite).toHaveProperty('_velocityPropertiesAdded');
+      expect(_sprite as Utils.PIXISprite).toHaveProperty('_velocityPropertiesAdded');
     });
   });
 
@@ -126,7 +125,7 @@ describe('Factory.Sprite', () => {
     const app = new PIXI.Application();
     document.body.appendChild(app.view);
 
-    let _sprite: Maybe<PIXISprite>;
+    let _sprite: Utils.Maybe<Utils.PIXISprite>;
 
     Promise.resolve(
       app.loader.add('example', '_.jpg').load((loader, resources) => {
@@ -143,12 +142,12 @@ describe('Factory.Sprite', () => {
         _sprite = sprite;
       }),
     ).then(() => {
-      expect(_sprite as PIXISprite).toHaveProperty('_d20RPGPropertiesAdded');
+      expect(_sprite as Utils.PIXISprite).toHaveProperty('_d20RPGPropertiesAdded');
     });
   });
 
   it('should set new velocity in generic sprite', () => {
-    const sprite = Factory.Sprite.createGenericSprite(
+    const sprite: Utils.PIXISprite = Factory.Sprite.createGenericSprite(
       { foo: 'bar' },
       {
         bump: false,
@@ -163,7 +162,7 @@ describe('Factory.Sprite', () => {
   });
 
   it('should set wrong new velocity in generic sprite', () => {
-    const sprite = Factory.Sprite.createGenericSprite(
+    const sprite: Utils.PIXISprite = Factory.Sprite.createGenericSprite(
       { foo: 'bar' },
       {
         bump: false,
@@ -178,7 +177,7 @@ describe('Factory.Sprite', () => {
   });
 
   it('should set new movement in generic sprite', () => {
-    const sprite = Factory.Sprite.createGenericSprite(
+    const sprite: Utils.PIXISprite = Factory.Sprite.createGenericSprite(
       { foo: 'bar' },
       {
         bump: false,
@@ -192,7 +191,7 @@ describe('Factory.Sprite', () => {
   });
 
   it('should set wrong new movement in generic sprite', () => {
-    const sprite = Factory.Sprite.createGenericSprite(
+    const sprite: Utils.PIXISprite = Factory.Sprite.createGenericSprite(
       { foo: 'bar' },
       {
         bump: false,
@@ -206,25 +205,25 @@ describe('Factory.Sprite', () => {
   });
 
   it('should exists factory specific sprite with PSprite instance', () => {
-    const sprite = new PSprite().createSpecificSprite({ name: 'guest001' }, { foo: 'bar' });
+    const sprite: Utils.PIXISprite = new PSprite().createSpecificSprite({ name: 'guest001' }, { foo: 'bar' });
 
     expect(sprite).toHaveProperty('foo', 'bar');
   });
 
   it('should overload sprite definitions in specific create sprite in a PSprite instance', () => {
-    const sprite = new PSprite().createSpecificSprite({ name: 'guest001' }, { name: 'guest002' });
+    const sprite: Utils.PIXISprite = new PSprite().createSpecificSprite({ name: 'guest001' }, { name: 'guest002' });
 
     expect(sprite).toHaveProperty('name', 'guest002');
   });
 
   it('should exists factory specific sprite in a Factory', () => {
-    const sprite = Factory.Sprite.createSpecificSprite({ name: 'guest001' }, { foo: 'bar' });
+    const sprite: Utils.PIXISprite = Factory.Sprite.createSpecificSprite({ name: 'guest001' }, { foo: 'bar' });
 
     expect(sprite).toHaveProperty('foo', 'bar');
   });
 
   it('should overload sprite definitions in specific create sprite in a Factory', () => {
-    const sprite = Factory.Sprite.createSpecificSprite({ name: 'guest001' }, { name: 'guest002' });
+    const sprite: Utils.PIXISprite = Factory.Sprite.createSpecificSprite({ name: 'guest001' }, { name: 'guest002' });
 
     expect(sprite).toHaveProperty('name', 'guest002');
   });

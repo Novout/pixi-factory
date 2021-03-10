@@ -1,7 +1,6 @@
 /**
  * A generic template for possible undefined or null.
  *
- * @type {Maybe<T>}
  * @typeparam T Generic type receive
  */
 export type Maybe<T> = T | undefined | null;
