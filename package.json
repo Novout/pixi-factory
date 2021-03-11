@@ -24,6 +24,9 @@
     "factory",
     "typescript"
   ],
+  "dependencies": {
+    "gsap": "^3.6.0"
+  },
   "devDependencies": {
     "@babel/cli": "^7.13.0",
     "@babel/core": "^7.13.8",
