@@ -244,7 +244,7 @@ describe('Factory.Sprite', () => {
     expect(setTimeout).toHaveBeenCalledTimes(5);
   });
 
-  it('should velocity with error direction option with throw error', () => {
+  it('should velocity with error direction option to throw error', () => {
     const sprite: Utils.PIXISprite = Factory.Sprite.createGenericSprite(
       { foo: 'bar' },
       {
