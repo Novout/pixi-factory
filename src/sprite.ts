@@ -185,11 +185,11 @@ export class PSprite {
           // @ts-ignore
           const timeline = new GSAP.timeline({
             onStart: () => {
-              __sprite.velocity.movement = false;
+              if (!content.movement) __sprite.velocity.movement = false;
               __sprite.velocity.__KNOCKBACK_HIT = true;
             },
             onComplete: () => {
-              __sprite.velocity.movement = true;
+              if (!content.movement) __sprite.velocity.movement = true;
               __sprite.velocity.__KNOCKBACK_HIT = false;
             },
           });
@@ -199,28 +199,48 @@ export class PSprite {
           const _cond: () => void =
             {
               left: () => {
-                timeline.to(__sprite, content.time, {
-                  x: (values.x -= content.value),
-                  ease: Expo.easeOut,
-                });
+                timeline.to(
+                  __sprite,
+                  content.time,
+                  {
+                    x: (values.x -= content.value),
+                    ease: Expo.easeOut,
+                  },
+                  'default',
+                );
               },
               right: () => {
-                timeline.to(__sprite, content.time, {
-                  x: (values.x += content.value),
-                  ease: Expo.easeOut,
-                });
+                timeline.to(
+                  __sprite,
+                  content.time,
+                  {
+                    x: (values.x += content.value),
+                    ease: Expo.easeOut,
+                  },
+                  'default',
+                );
               },
               up: () => {
-                timeline.to(__sprite, content.time, {
-                  y: (values.y -= content.value),
-                  ease: Expo.easeOut,
-                });
+                timeline.to(
+                  __sprite,
+                  content.time,
+                  {
+                    y: (values.y -= content.value),
+                    ease: Expo.easeOut,
+                  },
+                  'default',
+                );
               },
               down: () => {
-                timeline.to(__sprite, content.time, {
-                  y: (values.y += content.value),
-                  ease: Expo.easeOut,
-                });
+                timeline.to(
+                  __sprite,
+                  content.time,
+                  {
+                    y: (values.y += content.value),
+                    ease: Expo.easeOut,
+                  },
+                  'default',
+                );
               },
             }[content.direction] ||
             (() => {

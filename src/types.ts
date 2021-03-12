@@ -279,4 +279,7 @@ export interface KnockbackOptions {
 
   /** Jump sprite for 'right' and 'left' values */
   jump?: boolean;
+
+  /** `true` hability velocity.movement in animation knockback */
+  movement?: boolean;
 }
