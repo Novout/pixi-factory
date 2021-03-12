@@ -1,12 +1,12 @@
 {
   "compilerOptions": {
-    "outDir": "lib",
+    "outDir": "../lib",
     "target": "es5",
     "module": "esnext",
     "lib": ["es5", "es6", "dom"],
     "sourceMap": true,
     "strict": true,
-    "strictNullChecks":false,
+    "strictNullChecks": false,
     "strictFunctionTypes": true,
     "noImplicitReturns": true,
     "noImplicitThis": true,
@@ -20,5 +20,5 @@
     "moduleResolution": "node"
   },
   "include": ["src"],
-  "exclude": ["node_modules", "lib", "**/*.test.ts"]
+  "exclude": ["node_modules", "../lib", "**/*.test.ts"]
 }

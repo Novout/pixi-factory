@@ -65,7 +65,7 @@ The internal methods are also generic, waiting to receive the sprite that is bei
 
 ```js
 import * as PIXI from 'pixi.js';
-import Factory, { Utils } from 'pixi-factory';
+import Factory from 'pixi-factory';
 
 const example = Factory.Sprite.createGenericSprite(new PIXI.Sprite(resources.example.texture), {
   bump: true,
@@ -84,6 +84,15 @@ example.velocity.y = 10;
 
 > All methods are available in the documentation
 
+##### Actions and Events
+
+All methods starts with `A_**` with is called only once to execute its effect, while those starting with the prefix `E_**` need to be called constantly on the same tick such as tracking motion events that are specific to each tick.
+
+```ts
+/* By default, this function takes 1 second to be fully generated, but it only needs to be called once to take effect. */
+sprite.velocity.A_knockbackHit(sprite);
+```
+
 ## TypeScript
 
 All interfaces and types are exported with the `Utils` namespace, thus being able to directly use the internal typing for your objects.
@@ -94,7 +103,7 @@ import Factory, { Utils } from 'pixi-factory';
 const sprite: Utils.PIXISprite = Factory.Sprite.createGenericSprite(example, {
   bump: true,
   velocity: true,
-  d20rpg: true
+  d20rpg: true,
 });
 ```
 

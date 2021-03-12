@@ -1,4 +1,13 @@
-import { Maybe, PIXIDefaultSprite, PIXISprite, PIXISpriteOptions, PIXISpriteOpenRPG } from './types';
+import {
+  Maybe,
+  PIXIDefaultSprite,
+  PIXISprite,
+  PIXISpriteOptions,
+  PIXISpriteOpenRPG,
+  PIXISpriteVelocity,
+  KnockbackOptions,
+} from './types';
+import GSAP, { Expo } from 'gsap';
 
 /**
  * The Sprite object is the base for all textured objects that are rendered to the screen
@@ -165,7 +174,61 @@ export class PSprite {
         setMovement: (__sprite: PIXISprite) => {
           __sprite!.velocity!.movement = !__sprite!.velocity!.movement;
         },
-      };
+        A_knockbackHit: (
+          __sprite: PIXISprite,
+          content: KnockbackOptions = {
+            value: 50,
+            time: 0.5,
+            direction: 'right',
+          },
+        ) => {
+          // @ts-ignore
+          const timeline = new GSAP.timeline({
+            onStart: () => {
+              __sprite.velocity.movement = false;
+              __sprite.velocity.__KNOCKBACK_HIT = true;
+            },
+            onComplete: () => {
+              __sprite.velocity.movement = true;
+              __sprite.velocity.__KNOCKBACK_HIT = false;
+            },
+          });
+
+          const values = { x: __sprite.x, y: __sprite.y };
+
+          const _cond: () => void =
+            {
+              left: () => {
+                timeline.to(__sprite, content.time, {
+                  x: (values.x -= content.value),
+                  ease: Expo.easeOut,
+                });
+              },
+              right: () => {
+                timeline.to(__sprite, content.time, {
+                  x: (values.x += content.value),
+                  ease: Expo.easeOut,
+                });
+              },
+              up: () => {
+                timeline.to(__sprite, content.time, {
+                  y: (values.y -= content.value),
+                  ease: Expo.easeOut,
+                });
+              },
+              down: () => {
+                timeline.to(__sprite, content.time, {
+                  y: (values.y += content.value),
+                  ease: Expo.easeOut,
+                });
+              },
+            }[content.direction] ||
+            (() => {
+              throw new Error('pixi-factory: knockback receive unknown direction parameter');
+            });
+          _cond && _cond();
+        },
+      } as PIXISpriteVelocity;
 
       this._sprite._velocityPropertiesAdded = true;
     }

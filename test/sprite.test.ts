@@ -204,6 +204,67 @@ describe('Factory.Sprite', () => {
     expect(sprite.velocity.movement).not.toBe(true);
   });
 
+  it('should velocity effect knockback with default options', () => {
+    const sprite: Utils.PIXISprite = Factory.Sprite.createGenericSprite(
+      { foo: 'bar' },
+      {
+        bump: false,
+        velocity: true,
+        d20rpg: false,
+      },
+    );
+
+    sprite.velocity.A_knockbackHit(sprite, {
+      value: 50,
+      time: 0.5,
+      direction: 'right',
+    });
+
+    /* 1 default + 4 for GSAP internal timeout */
+    expect(setTimeout).toHaveBeenCalledTimes(5);
+  });
+
+  it('should velocity effect knockback with new options', () => {
+    const sprite: Utils.PIXISprite = Factory.Sprite.createGenericSprite(
+      { foo: 'bar' },
+      {
+        bump: false,
+        velocity: true,
+        d20rpg: false,
+      },
+    );
+
+    sprite.velocity.A_knockbackHit(sprite, {
+      value: 100,
+      time: 2,
+      direction: 'left',
+    });
+
+    /* 1 default + 4 for GSAP internal timeout */
+    expect(setTimeout).toHaveBeenCalledTimes(5);
+  });
+
+  it('should velocity with error direction option with throw error', () => {
+    const sprite: Utils.PIXISprite = Factory.Sprite.createGenericSprite(
+      { foo: 'bar' },
+      {
+        bump: false,
+        velocity: true,
+        d20rpg: false,
+      },
+    );
+
+    try {
+      sprite.velocity.A_knockbackHit(sprite, {
+        value: 100,
+        time: 2,
+        direction: 'upp',
+      });
+    } catch (e) {
+      expect(e.message).toBe('pixi-factory: knockback receive unknown direction parameter');
+    }
+  });
+
   it('should exists factory specific sprite with PSprite instance', () => {
     const sprite: Utils.PIXISprite = new PSprite().createSpecificSprite({ name: 'guest001' }, { foo: 'bar' });
 

@@ -81,6 +81,7 @@ export interface PIXISprite extends PIXIDefaultSprite {
  * @type {Interface}
  */
 export interface PIXISpriteVelocity {
+  __KNOCKBACK_HIT?: boolean;
   /** `true` allows movement sprite */
   movement: boolean;
 
@@ -99,7 +100,7 @@ export interface PIXISpriteVelocity {
    * // ...
    * ```
    **/
-  setVelocity: (sprite: PIXISprite, value: number) => void;
+  setVelocity: (__sprite: PIXISprite, value: number) => void;
 
   /**
    *
@@ -112,7 +113,23 @@ export interface PIXISpriteVelocity {
    * ```
    *
    */
-  setMovement: (sprite: PIXISprite) => void;
+  setMovement: (__sprite: PIXISprite) => void;
+
+  /**
+   * Action: Sprite receive hit movement
+   *
+   * ```ts
+   * sprite.velocity.A_knockbackHit(sprite, {
+   *  value: 50, // quantity for movement value move
+   *  time: 0.5, // time to execute value
+   *  direction: 'right' // direction to sprite move
+   * })
+   * ```
+   *
+   * @param __sprite Actually object referal
+   * @param content Definitions for knockback effect
+   */
+  A_knockbackHit: (__sprite: PIXISprite, content: KnockbackOptions) => void;
 }
 
 /**
@@ -243,4 +260,23 @@ export interface PIXISpriteOpenRPGActionMagic {
 export interface PIXISpriteOpenRPGInventory {
   /** A generic array with items for render/interactive */
   base: Array<any>;
+}
+
+/**
+ * Options for effect knockback in target
+ *
+ * @type {Interface}
+ */
+export interface KnockbackOptions {
+  /** base value for all time duration in absolute values (x/y) */
+  value: number;
+
+  /** duration for value in seconds */
+  time: number;
+
+  /** Direction with enemy hit receive 'left', 'right', 'up', 'down' */
+  direction: string;
+
+  /** Jump sprite for 'right' and 'left' values */
+  jump?: boolean;
 }
