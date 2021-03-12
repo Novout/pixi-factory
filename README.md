@@ -86,7 +86,7 @@ example.velocity.y = 10;
 
 ##### Actions and Events
 
-All methods starts with `A_**` with is called only once to execute its effect, while those starting with the prefix `E_**` need to be called constantly on the same tick such as tracking motion events that are specific to each tick.
+All methods starts with `A_**` (Actions) is called only once to execute effect, while those starting with the prefix `E_**` (Events) need to be called constantly on the same tick such as tracking motion events that are specific to each tick.
 
 ```ts
 /* By default, this function takes 1 second to be fully generated, but it only needs to be called once to take effect. */
