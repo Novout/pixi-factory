@@ -175,6 +175,37 @@ describe('Factory.Sprite', () => {
     expect(_value).toBeLessThanOrEqual(8);
   });
 
+  it('should player roll attack with default settings', () => {
+    const sprite: Utils.PIXISprite = Factory.Sprite.createGenericSprite(
+      { foo: 'bar' },
+      {
+        bump: false,
+        velocity: false,
+        d20rpg: true,
+      },
+    );
+    const _value = sprite.base.A_rollAttack(sprite);
+
+    expect(_value).toBeGreaterThanOrEqual(1);
+    expect(_value).toBeLessThanOrEqual(20);
+  });
+
+  it('should player roll attack with new roll attack settings', () => {
+    const sprite: Utils.PIXISprite = Factory.Sprite.createGenericSprite(
+      { foo: 'bar' },
+      {
+        bump: false,
+        velocity: false,
+        d20rpg: true,
+      },
+    );
+    sprite.base.damage.rollAttack = 5;
+    const _value = sprite.base.A_rollAttack(sprite);
+
+    expect(_value).toBeGreaterThanOrEqual(5);
+    expect(_value).toBeLessThanOrEqual(25);
+  });
+
   it('should player roll attack greater than the targets AC value', () => {
     const sprite: Utils.PIXISprite = Factory.Sprite.createGenericSprite(
       { foo: 'bar' },

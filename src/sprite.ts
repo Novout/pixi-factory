@@ -299,7 +299,7 @@ export class PSprite {
           bruised_value: 0,
         },
         damage: {
-          rollAttack: 3,
+          rollAttack: 0,
           roll: [1, 8],
           bonus: 0,
           type: 'piercing',
@@ -339,11 +339,7 @@ export class PSprite {
           __sprite.base.life.maxHP += _life;
         },
         A_rollAttack: (__sprite: PIXISprite): number => {
-          return Math.floor(
-            Math.random() * (__sprite.base.damage.roll[0] * __sprite.base.damage.roll[1]) +
-              __sprite.base.damage.bonus +
-              1,
-          );
+          return Math.floor(Math.random() * 20) + __sprite.base.damage.rollAttack + 1;
         },
         A_rollDamage: (__sprite: PIXISprite): number => {
           return Math.floor(
