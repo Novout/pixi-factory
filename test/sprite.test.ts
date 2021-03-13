@@ -146,6 +146,61 @@ describe('Factory.Sprite', () => {
     });
   });
 
+  it('should player level up', () => {
+    const sprite: Utils.PIXISprite = Factory.Sprite.createGenericSprite(
+      { foo: 'bar' },
+      {
+        bump: false,
+        velocity: false,
+        d20rpg: true,
+      },
+    );
+    sprite.base.A_levelUP(sprite);
+
+    expect(sprite.base.level).toBe(2);
+  });
+
+  it('should player roll damage', () => {
+    const sprite: Utils.PIXISprite = Factory.Sprite.createGenericSprite(
+      { foo: 'bar' },
+      {
+        bump: false,
+        velocity: false,
+        d20rpg: true,
+      },
+    );
+    const _value = sprite.base.A_rollDamage(sprite);
+
+    expect(_value).toBeGreaterThanOrEqual(1);
+    expect(_value).toBeLessThanOrEqual(8);
+  });
+
+  it('should player roll attack greater than the targets AC value', () => {
+    const sprite: Utils.PIXISprite = Factory.Sprite.createGenericSprite(
+      { foo: 'bar' },
+      {
+        bump: false,
+        velocity: false,
+        d20rpg: true,
+      },
+    );
+
+    expect(sprite.base.A_receiveAttack(sprite, 20)).toBeTruthy();
+  });
+
+  it('should player roll attack less than the targets AC value', () => {
+    const sprite: Utils.PIXISprite = Factory.Sprite.createGenericSprite(
+      { foo: 'bar' },
+      {
+        bump: false,
+        velocity: false,
+        d20rpg: true,
+      },
+    );
+
+    expect(sprite.base.A_receiveAttack(sprite, -20)).toBeFalsy();
+  });
+
   it('should set new velocity in generic sprite', () => {
     const sprite: Utils.PIXISprite = Factory.Sprite.createGenericSprite(
       { foo: 'bar' },

@@ -266,10 +266,13 @@ export class PSprite {
 
     if (!this._sprite.base) {
       this._sprite.base = {
+        level: 1,
+        levelMax: 10,
         life: {
-          HP: 0,
+          HP: 8,
           minHP: 0,
-          maxHP: 0,
+          maxHP: 8,
+          diceHP: 8,
           temporaryHP: 0,
         },
         armor: {
@@ -294,6 +297,12 @@ export class PSprite {
           charmed_value: 0,
           stunned_value: 0,
           bruised_value: 0,
+        },
+        damage: {
+          rollAttack: 3,
+          roll: [1, 8],
+          bonus: 0,
+          type: 'piercing',
         },
         action: {
           attack: false,
@@ -321,6 +330,31 @@ export class PSprite {
         },
         inventory: {
           base: [],
+        },
+        A_levelUP: (__sprite: PIXISprite) => {
+          __sprite.base.level++;
+
+          const _life = Math.floor(Math.random() * __sprite.base.life.diceHP + 1);
+          __sprite.base.life.HP += _life;
+          __sprite.base.life.maxHP += _life;
+        },
+        A_rollAttack: (__sprite: PIXISprite): number => {
+          return Math.floor(
+            Math.random() * (__sprite.base.damage.roll[0] * __sprite.base.damage.roll[1]) +
+              __sprite.base.damage.bonus +
+              1,
+          );
+        },
+        A_rollDamage: (__sprite: PIXISprite): number => {
+          return Math.floor(
+            Math.random() * (__sprite.base.damage.roll[0] * __sprite.base.damage.roll[1]) +
+              __sprite.base.damage.bonus +
+              1,
+          );
+        },
+        A_receiveAttack: (__sprite: PIXISprite, bonus = 0): boolean => {
+          const _r = Math.floor(Math.random() * 20) + 1;
+          return __sprite.base.armor.CA + __sprite.base.armor.temporaryCA <= _r + bonus;
         },
       } as PIXISpriteOpenRPG;
 

@@ -154,11 +154,26 @@ export interface PIXISpriteOptions {
  * @type {Interface}
  */
 export interface PIXISpriteOpenRPG {
+  level: number;
+  levelMax: number;
   life: PIXISpriteOpenRPGLife;
   armor: PIXISpriteOpenRPGArmor;
   resistance: PIXISpriteOpenRPGResistance;
+  damage: PIXISpriteOpenRPGDamage;
   action: PIXISpriteOpenRPGAction;
   inventory: PIXISpriteOpenRPGInventory;
+
+  /** Level up sprite with random content */
+  A_levelUP: (__sprite: PIXISprite) => void;
+
+  /** Roll base attack */
+  A_rollAttack: (__sprite: PIXISprite) => number;
+
+  /** Roll base damage */
+  A_rollDamage: (__sprite: PIXISprite) => number;
+
+  /** `true` that means the target's AC value is less than the opponent's attack roll */
+  A_receiveAttack: (__sprite: PIXISprite, bonus?: number) => boolean;
 }
 
 /**
@@ -170,6 +185,9 @@ export interface PIXISpriteOpenRPGLife {
   HP: number;
   minHP: number;
   maxHP: number;
+
+  /** based on d&d 5e implement */
+  diceHP: number;
   temporaryHP: number;
 }
 
@@ -263,6 +281,24 @@ export interface PIXISpriteOpenRPGInventory {
 }
 
 /**
+ * A damage attack content implement
+ *
+ * @type {Interface}
+ */
+export interface PIXISpriteOpenRPGDamage {
+  /** bonus in d20 roll attack */
+  rollAttack: number;
+  /** Array with two options: roll[0] is dice numbers and roll[1] is type for dice: [1, 8]: 1d8 */
+  roll: Array<number>;
+
+  /** Adicional bônus damage */
+  bonus: number;
+
+  /** Attack type  */
+  type: string;
+}
+
+/**
  * Options for effect knockback in target
  *
  * @type {Interface}
@@ -276,9 +312,6 @@ export interface KnockbackOptions {
 
   /** Direction with enemy hit receive 'left', 'right', 'up', 'down' */
   direction: string;
-
-  /** Jump sprite for 'right' and 'left' values */
-  jump?: boolean;
 
   /** `true` hability velocity.movement in animation knockback */
   movement?: boolean;
