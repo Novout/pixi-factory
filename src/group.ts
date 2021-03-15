@@ -134,6 +134,7 @@ class SimpleGroup {
     if (this.__GROUP_KEY) {
       const _sprite = sprite as Array<PIXISprite | string>;
       (_sprite[1] as PIXISprite).__GROUP_KEY = _sprite[0] as string;
+      this.list.push(_sprite[1] as PIXISprite);
     } else {
       this.list.push(sprite as PIXISprite);
     }

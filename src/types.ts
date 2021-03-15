@@ -345,7 +345,7 @@ export interface PIXISimpleGroupOptions {
   cleanControl?: boolean;
 
   /** size = { width: 100, height: 100 } */
-  size?: Record<string, string>;
+  size?: Record<string, number>;
 
   /** a anchor container position set */
   position?: Array<number>;

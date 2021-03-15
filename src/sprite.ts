@@ -332,7 +332,11 @@ export class PSprite {
           base: [],
         },
         A_levelUP: (__sprite: PIXISprite) => {
-          __sprite.base.level++;
+          if (__sprite.base.level >= __sprite.base.levelMax) {
+            throw new Error('pixi-factory: sprite overflow max level');
+          } else {
+            __sprite.base.level++;
+          }
 
           const _life = Math.floor(Math.random() * __sprite.base.life.diceHP + 1);
           __sprite.base.life.HP += _life;

@@ -154,6 +154,30 @@ describe('Factory.Sprite', () => {
     expect(sprite.base.level).toBe(2);
   });
 
+  it('should player max level up', () => {
+    const sprite: Utils.PIXISprite = Factory.Sprite.createGenericSprite(
+      { foo: 'bar' },
+      {
+        bump: false,
+        velocity: false,
+        d20rpg: true,
+      },
+    );
+    try {
+      sprite.base.A_levelUP(sprite);
+      sprite.base.A_levelUP(sprite);
+      sprite.base.A_levelUP(sprite);
+      sprite.base.A_levelUP(sprite);
+      sprite.base.A_levelUP(sprite);
+      sprite.base.A_levelUP(sprite);
+      sprite.base.A_levelUP(sprite);
+      sprite.base.A_levelUP(sprite);
+      sprite.base.A_levelUP(sprite);
+    } catch (e) {
+      expect(e.message).toBe('pixi-factory: sprite overflow max level');
+    }
+  });
+
   it('should player roll damage', () => {
     const sprite: Utils.PIXISprite = Factory.Sprite.createGenericSprite(
       { foo: 'bar' },
@@ -282,6 +306,46 @@ describe('Factory.Sprite', () => {
     sprite.velocity.setMovement(sprite);
 
     expect(sprite.velocity.movement).not.toBe(true);
+  });
+
+  it('should velocity effect knockback with up options', () => {
+    const sprite: Utils.PIXISprite = Factory.Sprite.createGenericSprite(
+      { foo: 'bar' },
+      {
+        bump: false,
+        velocity: true,
+        d20rpg: false,
+      },
+    );
+
+    sprite.velocity.A_knockbackHit(sprite, {
+      value: 50,
+      time: 0.5,
+      direction: 'up',
+    });
+
+    /* 1 default + 4 for GSAP internal timeout */
+    expect(setTimeout).toHaveBeenCalledTimes(5);
+  });
+
+  it('should velocity effect knockback with down options', () => {
+    const sprite: Utils.PIXISprite = Factory.Sprite.createGenericSprite(
+      { foo: 'bar' },
+      {
+        bump: false,
+        velocity: true,
+        d20rpg: false,
+      },
+    );
+
+    sprite.velocity.A_knockbackHit(sprite, {
+      value: 50,
+      time: 0.5,
+      direction: 'down',
+    });
+
+    /* 1 default + 4 for GSAP internal timeout */
+    expect(setTimeout).toHaveBeenCalledTimes(5);
   });
 
   it('should velocity effect knockback with default options', () => {
