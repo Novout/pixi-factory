@@ -30,9 +30,10 @@ class SimpleGroup {
   }
 
   private keySetter(_list: Array<Array<string | PIXISprite>>, options: PIXISimpleGroupOptions): void {
+    this.list = [];
     this.__GROUP_KEY = true;
     _list.forEach((item: Array<string | PIXISprite>) => {
-      (item as PIXISprite).__GROUP_KEY = item[0] as string;
+      (item[1] as PIXISprite).__GROUP_KEY = item[0] as string;
       this.list.push(item[1] as PIXISprite);
     });
 
@@ -114,7 +115,12 @@ class SimpleGroup {
     let item;
 
     if (this.__GROUP_KEY) {
-      item = this.list.filter((sprite: PIXISprite) => sprite.__GROUP_KEY === (key as string))[0];
+      const _item = this.list.filter((sprite: PIXISprite) => sprite.__GROUP_KEY === (key as string));
+      if (_item.length === 1) {
+        item = _item[0];
+      } else {
+        throw new Error('pixi-factory: not exists element or a duplicated element in a array');
+      }
     } else {
       item = this.list[key as number];
     }

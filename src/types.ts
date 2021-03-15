@@ -351,5 +351,5 @@ export interface PIXISimpleGroupOptions {
   position?: Array<number>;
 
   /** a search for sprites with key name */
-  key?: string;
+  key?: boolean;
 }
