@@ -77,21 +77,19 @@ describe('Factory.Sprite', () => {
 
     let _sprite: Utils.Maybe<Utils.PIXISprite>;
 
-    Promise.resolve(
-      app.loader.add('example', '_.jpg').load((loader, resources) => {
-        const example = new PIXI.Sprite(resources['example']!.texture);
+    app.loader.add('example', '_.jpg').load((loader, resources) => {
+      const example = new PIXI.Sprite(resources['example']!.texture);
 
-        app.stage.addChild(example);
+      app.stage.addChild(example);
 
-        const sprite: Utils.PIXISprite = Factory.Sprite.createGenericSprite(example, {
-          bump: true,
-          velocity: false,
-          d20rpg: false,
-        });
+      const sprite: Utils.PIXISprite = Factory.Sprite.createGenericSprite(example, {
+        bump: true,
+        velocity: false,
+        d20rpg: false,
+      });
 
-        _sprite = sprite;
-      }),
-    ).then(() => {
+      _sprite = sprite;
+
       expect(_sprite as Utils.PIXISprite).toHaveProperty('_bumpPropertiesAdded');
     });
   });
@@ -102,21 +100,19 @@ describe('Factory.Sprite', () => {
 
     let _sprite: Utils.Maybe<Utils.PIXISprite>;
 
-    Promise.resolve(
-      app.loader.add('example', '_.jpg').load((loader, resources) => {
-        const example = new PIXI.Sprite(resources['example']!.texture);
+    app.loader.add('example', '_.jpg').load((loader, resources) => {
+      const example = new PIXI.Sprite(resources['example']!.texture);
 
-        app.stage.addChild(example);
+      app.stage.addChild(example);
 
-        const sprite: Utils.PIXISprite = Factory.Sprite.createGenericSprite(example, {
-          bump: false,
-          velocity: true,
-          d20rpg: false,
-        });
+      const sprite: Utils.PIXISprite = Factory.Sprite.createGenericSprite(example, {
+        bump: false,
+        velocity: true,
+        d20rpg: false,
+      });
 
-        _sprite = sprite;
-      }),
-    ).then(() => {
+      _sprite = sprite;
+
       expect(_sprite as Utils.PIXISprite).toHaveProperty('_velocityPropertiesAdded');
     });
   });
@@ -127,21 +123,19 @@ describe('Factory.Sprite', () => {
 
     let _sprite: Utils.Maybe<Utils.PIXISprite>;
 
-    Promise.resolve(
-      app.loader.add('example', '_.jpg').load((loader, resources) => {
-        const example = new PIXI.Sprite(resources['example']!.texture);
+    app.loader.add('example', '_.jpg').load((loader, resources) => {
+      const example = new PIXI.Sprite(resources['example']!.texture);
 
-        app.stage.addChild(example);
+      app.stage.addChild(example);
 
-        const sprite = Factory.Sprite.createGenericSprite(example, {
-          bump: false,
-          velocity: false,
-          d20rpg: true,
-        });
+      const sprite = Factory.Sprite.createGenericSprite(example, {
+        bump: false,
+        velocity: false,
+        d20rpg: true,
+      });
 
-        _sprite = sprite;
-      }),
-    ).then(() => {
+      _sprite = sprite;
+
       expect(_sprite as Utils.PIXISprite).toHaveProperty('_d20RPGPropertiesAdded');
     });
   });
