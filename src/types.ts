@@ -6,6 +6,20 @@
 export type Maybe<T> = T | undefined | null;
 
 /**
+ *
+ * A Sprite entry point for Factory.Group
+ *
+ */
+export type PIXISpriteGroup = PIXISprite | Array<PIXISprite | string>;
+
+/**
+ *
+ * A key for search sprite's in a Factory.Group
+ *
+ */
+export type PIXIGroupKey = string | number;
+
+/**
  * A any object with key string for `new PIXI.Sprite` and `new PIXI.AnimatedSprite`
  *
  * @type {Interface}
@@ -73,6 +87,12 @@ export interface PIXISprite extends PIXIDefaultSprite {
 
   /** `true` hability a generic d20 properties */
   _d20RPGPropertiesAdded?: boolean;
+
+  /** `true` hability simple group control */
+  _simpleGroupAdded?: boolean;
+
+  /** `true` sprite is a Factory.Group member */
+  __GROUP_KEY?: string;
 }
 
 /**
@@ -315,4 +335,21 @@ export interface KnockbackOptions {
 
   /** `true` hability velocity.movement in animation knockback */
   movement?: boolean;
+}
+
+export interface PIXISimpleGroupOptions {
+  /** A `PIXI.Container` */
+  container: any;
+
+  /** `true` does not enable `SimpleGroup` direct control over the sprite. */
+  cleanControl?: boolean;
+
+  /** size = { width: 100, height: 100 } */
+  size?: Record<string, string>;
+
+  /** a anchor container position set */
+  position?: Array<number>;
+
+  /** a search for sprites with key name */
+  key?: string;
 }

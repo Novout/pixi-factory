@@ -1,5 +1,5 @@
+import { PGroup } from './group';
 import { PSprite } from './sprite';
-import { PIXISprite } from './types';
 
 /**
  * The Factory for creation general objects
@@ -17,9 +17,11 @@ import { PIXISprite } from './types';
  * @class
  */
 export default class Factory {
-  public readonly Sprite: PIXISprite;
+  public readonly Sprite: PSprite;
+  public readonly Group: PGroup;
 
   constructor() {
     this.Sprite = new PSprite();
+    this.Group = new PGroup();
   }
 }
