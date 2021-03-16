@@ -93,6 +93,67 @@ All methods starts with `A_**` (Actions) is called only once to execute effect, 
 sprite.velocity.A_knockbackHit(sprite);
 ```
 
+### Group
+
+With `Factory.Group.*` create and handle groups in a more coherent way and with new features.
+
+#### Basic Usage
+
+```js
+import * as PIXI from 'pixi.js';
+import Factory from 'pixi-factory';
+// ...
+function setup() {
+  const sprite = Factory.Sprite.createGenericSprite(new PIXI.Sprite(resources.example.texture));
+  const group = Factory.Group.createGroup([sprite], { container: app.stage });
+
+  // or
+
+  const group = Factory.Group.createGroup(
+    [
+      ['wolf1', Factory.Sprite.createGenericSprite(new PIXI.Sprite(resources.wolf.texture))],
+      ['wolf2', Factory.Sprite.createGenericSprite(new PIXI.Sprite(resources.wolf.texture))],
+      ['wolf3', Factory.Sprite.createGenericSprite(new PIXI.Sprite(resources.wolf.texture))],
+    ],
+    { container: app.stage, key: true },
+  );
+
+  console.log(group.getSprite('wolf1'));
+}
+```
+
+##### Sprites Reference
+
+It is possible to mutate objects in all ways to maintain coherent handling and not restrict sprites to the `Factory`
+
+```js
+// example utilizing a pixi-controller package
+import * as PIXI from 'pixi.js';
+import Controller, { BUTTON, PLAYER } from 'pixi-controller';
+import Factory from 'pixi-factory';
+
+const app = new PIXI.Application();
+document.body.appendChild(app.view);
+
+app.loader.add('example', 'example.jpg').load((loader, resources) => {
+  const _example = Factory.Sprite.createGenericSprite(new PIXI.Sprite(resources.example.texture), {
+    bump: true,
+    velocity: true,
+  });
+  const group = Factory.Group.createGroup([['example', _example]], { container: app.stage, key: true });
+  Controller.Mouse.prevent(BUTTON.RIGHT);
+
+  app.ticker.add(() => {
+    if (Controller.Keyboard.isKeyDown(...PLAYER.LEFT)) group.getSprite('example').x -= 1;
+    if (Controller.Keyboard.isKeyDown(...PLAYER.RIGHT)) _example.x += 1;
+    if (Controller.Keyboard.isKeyDown(...PLAYER.UP)) group.getSprite('example').y -= 1;
+    if (Controller.Keyboard.isKeyDown(...PLAYER.DOWN)) _example.y += 1;
+
+    Controller.update();
+  });
+});
+```
+
 ## TypeScript
 
 All interfaces and types are exported with the `Utils` namespace, thus being able to directly use the internal typing for your objects.
