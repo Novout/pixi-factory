@@ -8,7 +8,7 @@ import { PIXISprite, PIXISimpleGroupOptions, PIXISpriteGroup, PIXIGroupKey, PIXI
  * import Factory from 'pixi-factory';
  * // ...
  * function setup() {
- *  const sprite = Factory.Sprite.createSprite(new PIXI.Sprite(resources.example.texture));
+ *  const sprite = Factory.Sprite.createGenericSprite(new PIXI.Sprite(resources.example.texture));
  *  const group = Factory.Group.createGroup([ sprite ], { container: app.stage });
  *   // ...
  * }
@@ -202,12 +202,12 @@ class SimpleGroup {
  * import Factory from 'pixi-factory';
  * // ...
  * function setup() {
- *  const sprite = Factory.Sprite.createSprite(new PIXI.Sprite(resources.example.texture));
+ *  const sprite = Factory.Sprite.createGenericSprite(new PIXI.Sprite(resources.example.texture));
  *  const group = Factory.Group.createGroup([ sprite ], { container: app.stage });
  *
  *  // or
  *
- *  const sprite = Factory.Sprite.createSprite(new PIXI.Sprite(resources.example.texture));
+ *  const sprite = Factory.Sprite.createGenericSprite(new PIXI.Sprite(resources.example.texture));
  *  const group = Factory.Group.createGroup([['foo', sprite]], { container: app.stage, key: true });
  * }
  * ```
@@ -224,12 +224,12 @@ export class PGroup {
    * import Factory from 'pixi-factory';
    * // ...
    * function setup() {
-   *  const sprite = Factory.Sprite.createSprite(new PIXI.Sprite(resources.example.texture));
+   *  const sprite = Factory.Sprite.createGenericSprite(new PIXI.Sprite(resources.example.texture));
    *  const group = Factory.Group.createGroup([ sprite ], { container: app.stage });
    *
    *  // or
    *
-   *  const sprite = Factory.Sprite.createSprite(new PIXI.Sprite(resources.example.texture));
+   *  const sprite = Factory.Sprite.createGenericSprite(new PIXI.Sprite(resources.example.texture));
    *  const group = Factory.Group.createGroup([['foo', sprite]], { container: app.stage, key: true });
    * }
    * ```
