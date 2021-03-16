@@ -6,11 +6,16 @@
 export type Maybe<T> = T | undefined | null;
 
 /**
+ * A group for key and Factory.Sprite
+ */
+export type PIXISpriteGroupKey = Array<string | PIXISprite>;
+
+/**
  *
  * A Sprite entry point for Factory.Group
  *
  */
-export type PIXISpriteGroup = PIXISprite | Array<PIXISprite | string>;
+export type PIXISpriteGroup = PIXISprite | PIXISpriteGroupKey;
 
 /**
  *
