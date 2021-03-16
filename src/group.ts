@@ -51,27 +51,7 @@ class SimpleGroup {
       this.list.push(item[1] as PIXISprite);
     });
 
-    this.container = options.container;
-    if (!options.cleanControl) {
-      this.setGroupInSprite();
-    }
-
-    if (options.size) {
-      this.container.width = options.size.width;
-      this.container.height = options.size.height;
-    }
-
-    if (options.position) {
-      if (options.position.length === 2) {
-        this.container.position.set(options.position[0], options.position[1]);
-      } else {
-        throw new Error('pixi-factory: options.position is wrong array, correct example: position = [50, 50]');
-      }
-    }
-
-    this.list.forEach((sprite: PIXISprite) => {
-      this.container.addChild(sprite);
-    });
+    this.setGroup(_list, options);
   }
 
   /**
@@ -81,6 +61,15 @@ class SimpleGroup {
    */
   private defaultSetter(_list: Array<PIXISprite>, options: PIXISimpleGroupOptions): void {
     this.list = _list;
+    this.setGroup(_list, options);
+  }
+
+  /**
+   *
+   * @param _list A `PIXI.Sprite` or a `Factory.Sprite` array.
+   * @param options Options for create a group sprite.
+   */
+  private setGroup(_list: Array<PIXISprite>, options: PIXISimpleGroupOptions): void {
     this.container = options.container;
     if (!options.cleanControl) {
       this.setGroupInSprite();
@@ -188,6 +177,7 @@ class SimpleGroup {
   }
 
   /**
+   * Insert a new sprite in a group
    *
    * @param sprite A new `Factory.Sprite` insert in a group array
    */
