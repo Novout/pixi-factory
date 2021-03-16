@@ -158,7 +158,7 @@ class SimpleGroup {
  * @class
  */
 export class PGroup {
-  public createGroup(sprites: Array<PIXISprite>, options: PIXISimpleGroupOptions): SimpleGroup {
+  public createGroup(sprites: Array<PIXISpriteGroup>, options: PIXISimpleGroupOptions): SimpleGroup {
     return new SimpleGroup(sprites, options);
   }
 }
