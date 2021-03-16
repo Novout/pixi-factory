@@ -1,4 +1,4 @@
-import { PIXISprite, PIXISimpleGroupOptions, PIXISpriteGroup, PIXIGroupKey, PIXISpriteGroupKey } from './types';
+import { PIXISprite, PIXISimpleGroupOptions, PIXISpriteGroup, PIXIGroupKey, PIXISpriteGroupKey, Maybe } from './types';
 
 /**
  * The default group generate for createGroup function
@@ -161,7 +161,15 @@ class SimpleGroup {
    * @returns A `Factory.Sprite` in group list
    */
   public getSprite(key: PIXIGroupKey): PIXISprite {
-    let item;
+    let item: Maybe<PIXISprite>;
+
+    if (typeof key === 'string' && !this.__GROUP_KEY) {
+      throw new Error('pixi-sprite: key as not enable, in this group, go through the options key: true');
+    }
+
+    if (typeof key === 'number' && this.__GROUP_KEY) {
+      console.warn('pixi-sprite: not recommended to search for the number while the search for the key is enabled.');
+    }
 
     if (this.__GROUP_KEY) {
       const _item = this.list.filter((sprite: PIXISprite) => sprite.__GROUP_KEY === (key as string));
@@ -174,7 +182,7 @@ class SimpleGroup {
       item = this.list[key as number];
     }
 
-    if (!item) throw new Error('pixi-factory: sprite not exists in SimpleGroup');
+    if (!item) throw new Error('pixi-factory: sprite not exists in group');
 
     return item;
   }

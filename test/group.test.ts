@@ -25,7 +25,7 @@ describe('Factory.Group', () => {
     try {
       Factory.Group.createGroup([], { container: stage }).getSprite(0);
     } catch (e) {
-      expect(e.message).toBe('pixi-factory: sprite not exists in SimpleGroup');
+      expect(e.message).toBe('pixi-factory: sprite not exists in group');
     }
   });
 
@@ -49,7 +49,7 @@ describe('Factory.Group', () => {
 
       group.getSprite(1);
     } catch (e) {
-      expect(e.message).toBe('pixi-factory: sprite not exists in SimpleGroup');
+      expect(e.message).toBe('pixi-factory: sprite not exists in group');
     }
   });
 
@@ -123,7 +123,7 @@ describe('Factory.Group', () => {
     try {
       group.newSprite(['foo', sprite]);
     } catch (e) {
-      expect(e.message).toBe('pixi-factory: sprite not exists in SimpleGroup');
+      expect(e.message).toBe('pixi-factory: sprite not exists in group');
     }
   });
 
@@ -241,5 +241,21 @@ describe('Factory.Group', () => {
     group.newSprite(['foo', sprite]);
 
     expect(group.getSprite('foo')).toBeTruthy();
+  });
+
+  it('should not search a sprite with a string parameter', () => {
+    const sprite: Utils.PIXISprite = Factory.Sprite.createGenericSprite({ foo: 'bar' });
+
+    const stage = { addChild: (_: any) => {} };
+
+    const group = Factory.Group.createGroup([], { container: stage, key: false });
+
+    group.newSprite([sprite]);
+
+    try {
+      group.getSprite('foo');
+    } catch (e) {
+      expect(e.message).toBe('pixi-sprite: key as not enable, in this group, go through the options key: true');
+    }
   });
 });
