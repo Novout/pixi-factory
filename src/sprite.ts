@@ -6,7 +6,9 @@ import {
   PIXISpriteOpenRPG,
   PIXISpriteVelocity,
   KnockbackOptions,
+  PIXIHitOptions,
 } from './types';
+import { hitTestRectangle, hitTestCircle } from './contain';
 import GSAP, { Expo } from 'gsap';
 
 /**
@@ -355,6 +357,17 @@ export class PSprite {
         A_receiveAttack: (__sprite: PIXISprite, bonus = 0): boolean => {
           const _r = Math.floor(Math.random() * 20) + 1;
           return __sprite.base.armor.CA + __sprite.base.armor.temporaryCA <= _r + bonus;
+        },
+        E_hit: (r1: PIXISprite, r2: PIXISprite, options: PIXIHitOptions) => {
+          let _r: Maybe<boolean>;
+
+          if (options.type === 'rectangle') {
+            _r = hitTestRectangle(r1, r2);
+          } else if (options.type === 'circle') {
+            _r = hitTestCircle(r1, r2);
+          }
+
+          return _r as boolean;
         },
       } as PIXISpriteOpenRPG;
 

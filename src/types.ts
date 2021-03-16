@@ -199,6 +199,9 @@ export interface PIXISpriteOpenRPG {
 
   /** `true` that means the target's AC value is less than the opponent's attack roll */
   A_receiveAttack: (__sprite: PIXISprite, bonus?: number) => boolean;
+
+  /** `true` is a collision in a sprite */
+  E_hit: (r1: PIXISprite, r2: PIXISprite, options: PIXIHitOptions) => boolean;
 }
 
 /**
@@ -342,6 +345,11 @@ export interface KnockbackOptions {
   movement?: boolean;
 }
 
+/**
+ * Options for a simple group constructor
+ *
+ * @type {Interface}
+ */
 export interface PIXISimpleGroupOptions {
   /** A `PIXI.Container` */
   container: any;
@@ -357,4 +365,14 @@ export interface PIXISimpleGroupOptions {
 
   /** a search for sprites with key name */
   key?: boolean;
+}
+
+/**
+ * Options for hit event
+ *
+ * @type {Interface}
+ */
+export interface PIXIHitOptions {
+  /** `true` is a sprite area. Options: `rectangle`, `circle` */
+  type?: string;
 }

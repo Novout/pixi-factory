@@ -88,9 +88,68 @@ example.velocity.y = 10;
 
 All methods starts with `A_**` (Actions) is called only once to execute effect, while those starting with the prefix `E_**` (Events) need to be called constantly on the same tick such as tracking motion events that are specific to each tick.
 
+##### Action
+
 ```ts
 /* By default, this function takes 1 second to be fully generated, but it only needs to be called once to take effect. */
 sprite.velocity.A_knockbackHit(sprite);
+```
+
+##### Events
+
+```ts
+// example utilizing a pixi-controller package
+import * as PIXI from 'pixi.js';
+import Controller, { BUTTON, PLAYER } from 'pixi-controller';
+import Factory from 'pixi-factory';
+
+const app = new PIXI.Application();
+document.body.appendChild(app.view);
+
+app.loader.add('example', 'example.jpg').load((loader, resources) => {
+  const a = Factory.Sprite.createGenericSprite(new PIXI.Sprite(resources.example.texture), {
+    bump: true,
+    velocity: true,
+    d20rpg: true,
+  });
+
+  const b = Factory.Sprite.createGenericSprite(new PIXI.Sprite(resources.example.texture), {
+    bump: true,
+    velocity: true,
+    d20rpg: true,
+  });
+
+  const group = Factory.Group.createGroup(
+    [
+      ['example1', a],
+      ['example2', b],
+    ],
+    {
+      container: app.stage,
+      key: true,
+    },
+  );
+
+  a.width = 50;
+  a.height = 50;
+
+  b.width = 50;
+  b.height = 50;
+  b.x = 100;
+  b.y = 100;
+
+  app.ticker.add(() => {
+    if (Controller.Keyboard.isKeyDown(...PLAYER.LEFT)) group.getSprite('example1').x -= 1;
+    if (Controller.Keyboard.isKeyDown(...PLAYER.RIGHT)) group.getSprite('example1').x += 1;
+    if (Controller.Keyboard.isKeyDown(...PLAYER.UP)) group.getSprite('example1').y -= 1;
+    if (Controller.Keyboard.isKeyDown(...PLAYER.DOWN)) group.getSprite('example1').y += 1;
+
+    /* E_hit in a ticker call */
+    console.log(group.getSprite('example1').base.E_hit(a, b, { type: 'rectangle' }));
+
+    Controller.update();
+  });
+});
 ```
 
 ### Group
