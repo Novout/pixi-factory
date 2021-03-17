@@ -16,7 +16,7 @@ import { PIXISprite, PIXISimpleGroupOptions, PIXISpriteGroup, PIXIGroupKey, PIXI
  *
  * @class
  */
-class SimpleGroup {
+export class SimpleGroup {
   /** A sprite list belonging in group */
   private list: Array<PIXISprite>;
 
