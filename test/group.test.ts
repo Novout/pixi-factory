@@ -258,4 +258,136 @@ describe('Factory.Group', () => {
       expect(e.message).toBe('pixi-sprite: key as not enable, in this group, go through the options key: true');
     }
   });
+
+  it('should execute callback in a group hit effect', () => {
+    const foo: Utils.PIXISprite = Factory.Sprite.createGenericSprite(
+      { foo: 'foo' },
+      {
+        bump: true,
+        velocity: true,
+        d20rpg: true,
+      },
+    );
+    const bar: Utils.PIXISprite = Factory.Sprite.createGenericSprite(
+      { bar: 'bar' },
+      {
+        bump: true,
+        velocity: true,
+        d20rpg: true,
+      },
+    );
+
+    const stage = { addChild: (_: any) => {} };
+
+    const group = Factory.Group.createGroup([], { container: stage, key: true });
+
+    group.newSprite(['foo', foo]);
+
+    try {
+      group.E_hitEffect(bar, [
+        () => {
+          throw new Error('it is');
+        },
+      ]);
+    } catch (e) {
+      expect(e.message).toBe('it is');
+    }
+  });
+
+  it('should not execute a callback with a specific sprite', () => {
+    const foo: Utils.PIXISprite = Factory.Sprite.createGenericSprite({ foo: 'foo' });
+    const bar: Utils.PIXISprite = Factory.Sprite.createGenericSprite({ bar: 'bar' });
+
+    const stage = { addChild: (_: any) => {} };
+
+    const group = Factory.Group.createGroup([], { container: stage, key: false });
+
+    group.newSprite(foo);
+    group.newSprite(bar);
+
+    try {
+      group.E_hitEffect(bar, [
+        () => {
+          throw new Error('not execute this');
+        },
+      ]);
+    } catch (e) {
+      expect(e.message).toBe('pixi-factory: bump or d20 properties not added in E_hitEffect sprites');
+    }
+  });
+
+  it('should execute callback in a sprite group member hit effect', () => {
+    const foo: Utils.PIXISprite = Factory.Sprite.createGenericSprite(
+      { foo: 'foo' },
+      {
+        bump: true,
+        velocity: true,
+        d20rpg: true,
+      },
+    );
+    const bar: Utils.PIXISprite = Factory.Sprite.createGenericSprite(
+      { bar: 'bar' },
+      {
+        bump: true,
+        velocity: true,
+        d20rpg: true,
+      },
+    );
+
+    const stage = { addChild: (_: any) => {} };
+
+    const group = Factory.Group.createGroup([], { container: stage, key: true });
+
+    group.newSprite(['foo', foo]);
+    group.newSprite(['bar', bar]);
+
+    try {
+      group.E_hitEffect(bar, [
+        () => {
+          throw new Error('it is');
+        },
+      ]);
+    } catch (e) {
+      expect(e.message).toBe('it is');
+    }
+  });
+
+  it('should execute callback in a sprite group member hit effect in a priority order', () => {
+    const foo: Utils.PIXISprite = Factory.Sprite.createGenericSprite(
+      { foo: 'foo' },
+      {
+        bump: true,
+        velocity: true,
+        d20rpg: true,
+      },
+    );
+    const bar: Utils.PIXISprite = Factory.Sprite.createGenericSprite(
+      { bar: 'bar' },
+      {
+        bump: true,
+        velocity: true,
+        d20rpg: true,
+      },
+    );
+
+    const stage = { addChild: (_: any) => {} };
+
+    const group = Factory.Group.createGroup([], { container: stage, key: true });
+
+    group.newSprite(['foo', foo]);
+    group.newSprite(['bar', bar]);
+
+    try {
+      group.E_hitEffect(bar, [
+        () => {
+          throw new Error('it is');
+        },
+        () => {
+          throw new Error('not is');
+        },
+      ]);
+    } catch (e) {
+      expect(e.message).toBe('it is');
+    }
+  });
 });

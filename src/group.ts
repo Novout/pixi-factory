@@ -26,6 +26,9 @@ class SimpleGroup {
   /** A define group search based in key members */
   private __GROUP_KEY = false;
 
+  /** A define group search based in array position member */
+  private __NUMBER_KEY = false;
+
   /**
    * @param {Array<PIXISpriteGroup>} [_list] A `PIXI.Sprite` or a `Factory.Sprite` array.
    * @param {PIXISimpleGroupOptions} [options] Options for create a group sprite.
@@ -61,6 +64,7 @@ class SimpleGroup {
    */
   private defaultSetter(_list: Array<PIXISprite>, options: PIXISimpleGroupOptions): void {
     this.list = _list;
+    this.__NUMBER_KEY = true;
     this.setGroup(_list, options);
   }
 
@@ -187,8 +191,48 @@ class SimpleGroup {
       (_sprite[1] as PIXISprite).__GROUP_KEY = _sprite[0] as string;
       this.list.push(_sprite[1] as PIXISprite);
     } else {
+      (sprite as PIXISprite).__NUMBER_KEY = this.list.length - 1;
       this.list.push(sprite as PIXISprite);
     }
+  }
+
+  /**
+   * Execute a multiple callback's if the target is collided with a group member.
+   *
+   * Callbacks are called in order of position in the past array.
+   *
+   * ```js
+   * group.E_hitEffect(bar, [
+   *    () => {
+   *      console.log('hello');
+   *    },
+   *    () => {
+   *      console.log('world');
+   *    },
+   * ]);
+   *```
+   *
+   * @param target A target compare in hit a group sprites
+   * @param execute A list for callback execute in a hit effect
+   */
+  public E_hitEffect(target: PIXISprite, execute: Array<() => void>) {
+    this.list.forEach((sprite: PIXISprite) => {
+      if (!sprite._bumpPropertiesAdded || !sprite._d20RPGPropertiesAdded)
+        throw new Error('pixi-factory: bump or d20 properties not added in E_hitEffect sprites');
+
+      if (
+        !(
+          (sprite.__GROUP_KEY === target.__GROUP_KEY && this.__GROUP_KEY) ||
+          (sprite.__NUMBER_KEY === target.__NUMBER_KEY && this.__NUMBER_KEY)
+        )
+      ) {
+        if (sprite.base.E_hit(sprite, target, { type: 'rectangle' })) {
+          execute.forEach((cb: () => void) => {
+            cb && cb();
+          });
+        }
+      }
+    });
   }
 }
 

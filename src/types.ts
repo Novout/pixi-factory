@@ -96,8 +96,11 @@ export interface PIXISprite extends PIXIDefaultSprite {
   /** `true` hability simple group control */
   _simpleGroupAdded?: boolean;
 
-  /** `true` sprite is a Factory.Group member */
+  /** a key at Factory.Group member */
   __GROUP_KEY?: string;
+
+  /** a key at Factory.Group member */
+  __NUMBER_KEY?: number;
 }
 
 /**
