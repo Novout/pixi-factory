@@ -390,4 +390,39 @@ describe('Factory.Group', () => {
       expect(e.message).toBe('it is');
     }
   });
+
+  it('should execute callback parameter sprite and your effect', () => {
+    const foo: Utils.PIXISprite = Factory.Sprite.createGenericSprite(
+      { foo: 'foo', x: 0, y: 0, width: 50, height: 50 },
+      {
+        bump: true,
+        velocity: true,
+        d20rpg: true,
+      },
+    );
+    const bar: Utils.PIXISprite = Factory.Sprite.createGenericSprite(
+      { bar: 'bar', x: 0, y: 0, width: 50, height: 50 },
+      {
+        bump: true,
+        velocity: true,
+        d20rpg: true,
+      },
+    );
+
+    const stage = { addChild: (_: any) => {} };
+
+    const group = Factory.Group.createGroup([], { container: stage, key: true });
+
+    group.newSprite(['foo', foo]);
+    group.newSprite(['bar', bar]);
+
+    group.E_hitEffect(foo, [
+      (_bar: Utils.PIXISprite) => {
+        _bar.x = 5000;
+      },
+    ]);
+
+    expect(bar.x).toBe(5000);
+    expect(group.getSprite('bar').x).toBe(5000);
+  });
 });

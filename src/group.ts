@@ -201,13 +201,15 @@ class SimpleGroup {
    *
    * Callbacks are called in order of position in the past array.
    *
-   * ```js
-   * group.E_hitEffect(bar, [
-   *    () => {
-   *      console.log('hello');
+   * Callback return a `PIXISprite` that was hit.
+   *
+   * ```ts
+   * group.E_hitEffect(player_sprite, [
+   *    (sprite_enemy: Utils.PIXISprite) => {
+   *      console.log(sprite_enemy)
    *    },
    *    () => {
-   *      console.log('world');
+   *      console.log('hello world');
    *    },
    * ]);
    *```
@@ -215,7 +217,7 @@ class SimpleGroup {
    * @param target A target compare in hit a group sprites
    * @param execute A list for callback execute in a hit effect
    */
-  public E_hitEffect(target: PIXISprite, execute: Array<() => void>) {
+  public E_hitEffect(target: PIXISprite, execute: Array<(sprite: PIXISprite) => void>): void {
     this.list.forEach((sprite: PIXISprite) => {
       if (!sprite._bumpPropertiesAdded || !sprite._d20RPGPropertiesAdded)
         throw new Error('pixi-factory: bump or d20 properties not added in E_hitEffect sprites');
@@ -227,8 +229,8 @@ class SimpleGroup {
         )
       ) {
         if (sprite.base.E_hit(sprite, target, { type: 'rectangle' })) {
-          execute.forEach((cb: () => void) => {
-            cb && cb();
+          execute.forEach((cb: (sprite: PIXISprite) => void) => {
+            cb && cb(sprite);
           });
         }
       }
