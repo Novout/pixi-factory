@@ -259,6 +259,22 @@ describe('Factory.Group', () => {
     }
   });
 
+  it('should not search a sprite with a number parameter', () => {
+    const sprite: Utils.PIXISprite = Factory.Sprite.createGenericSprite({ foo: 'bar' });
+
+    const stage = { addChild: (_: any) => {} };
+
+    const group = Factory.Group.createGroup([], { container: stage, key: true });
+
+    group.newSprite(['foo', sprite]);
+
+    try {
+      group.getSprite(0);
+    } catch (e) {
+      expect(e.message).toBe('pixi-sprite: not to search for the number while is key enabled.');
+    }
+  });
+
   it('should execute callback in a group hit effect', () => {
     const foo: Utils.PIXISprite = Factory.Sprite.createGenericSprite(
       { foo: 'foo' },
@@ -451,5 +467,22 @@ describe('Factory.Group', () => {
 
     expect(group.getArea().max.height).toBe(1000);
     expect(group.getArea().max.width).toBe(1000);
+  });
+
+  it('should set base area in a setter method', () => {
+    const stage = { width: 100, height: 100 };
+
+    const group = Factory.Group.createGroup([], {
+      container: stage,
+      area: { min: { height: 500, width: 500 }, max: { height: 1000, width: 1000 } },
+    });
+
+    group.setArea({ min: { height: 1000, width: 1000 }, max: { height: 2500, width: 2500 } });
+
+    expect(group.getArea().min.height).toBe(1000);
+    expect(group.getArea().min.width).toBe(1000);
+
+    expect(group.getArea().max.height).toBe(2500);
+    expect(group.getArea().max.width).toBe(2500);
   });
 });

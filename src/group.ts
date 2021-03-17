@@ -199,7 +199,7 @@ export class SimpleGroup {
     }
 
     if (typeof key === 'number' && this.__GROUP_KEY) {
-      console.warn('pixi-sprite: not recommended to search for the number while the search for the key is enabled.');
+      throw new Error('pixi-sprite: not to search for the number while is key enabled.');
     }
 
     if (this.__GROUP_KEY) {
