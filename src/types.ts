@@ -171,6 +171,9 @@ export interface PIXISpriteOptions {
 
   /** `true` allows generic d20 system properties */
   d20rpg?: boolean;
+
+  /** `object to overflow and insert properties in sprite` */
+  content?: Record<any, any>;
 }
 
 /**

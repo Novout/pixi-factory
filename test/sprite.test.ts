@@ -409,6 +409,38 @@ describe('Factory.Sprite', () => {
     }
   });
 
+  it('should set content in generic sprite', () => {
+    const sprite: Utils.PIXISprite = Factory.Sprite.createGenericSprite(
+      { foo: 'bar' },
+      {
+        bump: false,
+        velocity: false,
+        d20rpg: false,
+        content: {
+          test: 'test',
+        },
+      },
+    );
+
+    expect(sprite.test).toBe('test');
+  });
+
+  it('should override content in generic sprite', () => {
+    const sprite: Utils.PIXISprite = Factory.Sprite.createGenericSprite(
+      { foo: 'bar' },
+      {
+        bump: false,
+        velocity: false,
+        d20rpg: false,
+        content: {
+          foo: 'bar',
+        },
+      },
+    );
+
+    expect(sprite.foo).toBe('bar');
+  });
+
   it('should exists factory specific sprite with PSprite instance', () => {
     const sprite: Utils.PIXISprite = new PSprite().createSpecificSprite({ name: 'guest001' }, { foo: 'bar' });
 

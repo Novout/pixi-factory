@@ -94,12 +94,18 @@ export class PSprite {
    */
   public createGenericSprite(
     sprite: PIXIDefaultSprite,
-    { bump, velocity, d20rpg }: PIXISpriteOptions = {
+    { bump, velocity, d20rpg, content }: PIXISpriteOptions = {
       bump: true,
       velocity: true,
     } as PIXISpriteOptions,
   ): PIXISprite {
     this._sprite = sprite;
+
+    if (content) {
+      Object.entries(content).forEach((tuple) => {
+        (this._sprite as PIXISprite)[tuple[0]] = tuple[1];
+      });
+    }
 
     if (bump) this.addCollisionProperties();
     if (velocity) this.addVelocityProperties();
