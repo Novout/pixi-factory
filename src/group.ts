@@ -1,4 +1,12 @@
-import { PIXISprite, PIXISimpleGroupOptions, PIXISpriteGroup, PIXIGroupKey, PIXISpriteGroupKey, Maybe } from './types';
+import {
+  PIXISprite,
+  PIXISimpleGroupOptions,
+  PIXISpriteGroup,
+  PIXIGroupKey,
+  PIXISpriteGroupKey,
+  Maybe,
+  PIXIGroupArea,
+} from './types';
 
 /**
  * The default group generate for createGroup function
@@ -29,11 +37,16 @@ export class SimpleGroup {
   /** A define group search based in array position member */
   private __NUMBER_KEY = false;
 
+  /** a min-max for area active effects. default is min a actually width/height and max is a multiple by 2 */
+  private area: PIXIGroupArea;
+
   /**
    * @param {Array<PIXISpriteGroup>} [_list] A `PIXI.Sprite` or a `Factory.Sprite` array.
    * @param {PIXISimpleGroupOptions} [options] Options for create a group sprite.
    */
   constructor(_list: Array<PIXISpriteGroup>, options: PIXISimpleGroupOptions) {
+    this.area = { min: { height: 0, width: 0 }, max: { height: 0, width: 0 } };
+
     if (options.key) {
       this.keySetter(_list as Array<PIXISpriteGroupKey>, options);
     } else {
@@ -49,6 +62,7 @@ export class SimpleGroup {
   private keySetter(_list: Array<PIXISpriteGroupKey>, options: PIXISimpleGroupOptions): void {
     this.list = [];
     this.__GROUP_KEY = true;
+
     _list.forEach((item: PIXISpriteGroupKey) => {
       (item[1] as PIXISprite).__GROUP_KEY = item[0] as string;
       this.list.push(item[1] as PIXISprite);
@@ -65,6 +79,7 @@ export class SimpleGroup {
   private defaultSetter(_list: Array<PIXISprite>, options: PIXISimpleGroupOptions): void {
     this.list = _list;
     this.__NUMBER_KEY = true;
+
     this.setGroup(_list, options);
   }
 
@@ -95,6 +110,13 @@ export class SimpleGroup {
     this.list.forEach((sprite: PIXISprite) => {
       this.container.addChild(sprite);
     });
+
+    if (!options.area) {
+      this.area.min = { width: this.container.width, height: this.container.height };
+      this.area.max = { width: this.container.width * 2, height: this.container.height * 2 };
+    } else {
+      this.area = options.area;
+    }
   }
 
   /**
@@ -146,6 +168,22 @@ export class SimpleGroup {
    */
   public setContainer(stage: any): void {
     this.container = stage;
+  }
+
+  /**
+   *
+   * @returns A area property
+   */
+  public getArea(): PIXIGroupArea {
+    return this.area;
+  }
+
+  /**
+   *
+   * @param area Set a new area property
+   */
+  public setArea(area: PIXIGroupArea): void {
+    this.area = area;
   }
 
   /**

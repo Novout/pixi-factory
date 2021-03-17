@@ -425,4 +425,31 @@ describe('Factory.Group', () => {
     expect(bar.x).toBe(5000);
     expect(group.getSprite('bar').x).toBe(5000);
   });
+
+  it('should set base area without options', () => {
+    const stage = { width: 100, height: 100 };
+
+    const group = Factory.Group.createGroup([], { container: stage });
+
+    expect(group.getArea().min.height).toBe(100);
+    expect(group.getArea().min.width).toBe(100);
+
+    expect(group.getArea().max.height).toBe(200);
+    expect(group.getArea().max.width).toBe(200);
+  });
+
+  it('should set base area with options', () => {
+    const stage = { width: 100, height: 100 };
+
+    const group = Factory.Group.createGroup([], {
+      container: stage,
+      area: { min: { height: 500, width: 500 }, max: { height: 1000, width: 1000 } },
+    });
+
+    expect(group.getArea().min.height).toBe(500);
+    expect(group.getArea().min.width).toBe(500);
+
+    expect(group.getArea().max.height).toBe(1000);
+    expect(group.getArea().max.width).toBe(1000);
+  });
 });

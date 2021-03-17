@@ -371,6 +371,19 @@ export interface PIXISimpleGroupOptions {
 
   /** a search for sprites with key name */
   key?: boolean;
+
+  /** a definition for min and max size for effects */
+  area?: PIXIGroupArea;
+}
+
+export interface PIXIGroupAreaSize {
+  width: number;
+  height: number;
+}
+
+export interface PIXIGroupArea {
+  min: PIXIGroupAreaSize;
+  max: PIXIGroupAreaSize;
 }
 
 /**
