@@ -3,13 +3,13 @@ import { PIXISprite, PIXISimpleGroupOptions, PIXISpriteGroup, PIXIGroupKey, PIXI
 /**
  * The default group generate for createGroup function
  *
- * ```js
+ * ```ts
  * import * as PIXI from 'pixi.js';
- * import Factory from 'pixi-factory';
+ * import Factory, { Utils, SimpleGroup } from 'pixi-factory';
  * // ...
  * function setup() {
- *  const sprite = Factory.Sprite.createGenericSprite(new PIXI.Sprite(resources.example.texture));
- *  const group = Factory.Group.createGroup([ sprite ], { container: app.stage });
+ *  const sprite: Utils.PIXISprite = Factory.Sprite.createGenericSprite(new PIXI.Sprite(resources.example.texture));
+ *  const group: SimpleGroup = Factory.Group.createGroup([ sprite ], { container: app.stage });
  *   // ...
  * }
  * ```
