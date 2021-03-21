@@ -485,4 +485,18 @@ describe('Factory.Group', () => {
     expect(group.getArea().max.height).toBe(2500);
     expect(group.getArea().max.width).toBe(2500);
   });
+
+  it('should set a debugger active', () => {
+    const stage = { width: 100, height: 100, addChild: (_: any) => {} };
+
+    const group = Factory.Group.createGroup([], {
+      container: stage,
+      area: { min: { height: 500, width: 500 }, max: { height: 1000, width: 1000 } },
+    });
+
+    group.A_debugger(PIXI);
+
+    expect(group.getContainer().debuggerMin).toBeTruthy();
+    expect(group.getContainer().debuggerMax).toBeTruthy();
+  });
 });

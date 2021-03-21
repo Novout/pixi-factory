@@ -93,8 +93,6 @@ export class SimpleGroup {
    */
   private setGroup(_list: Array<PIXISprite>, options: PIXISimpleGroupOptions): void {
     this.container = options.container;
-    this.container.pivot.x = this.container.x += this.container.width;
-    this.container.pivot.y = this.container.y += this.container.height;
 
     if (!options.cleanControl) {
       this.setGroupInSprite();
