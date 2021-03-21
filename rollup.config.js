@@ -6,7 +6,7 @@ import babel from 'rollup-plugin-babel';
 import { terser } from 'rollup-plugin-terser';
 
 const optionsForPackage = [''];
-const optionsForCompile = ['esm', 'amd'];
+const optionsForCompile = ['esm'];
 
 const createPlugins = () => {
   return [
