@@ -499,4 +499,97 @@ describe('Factory.Group', () => {
     expect(group.getContainer().debuggerMin).toBeTruthy();
     expect(group.getContainer().debuggerMax).toBeTruthy();
   });
+
+  it('should remove a member in group with a number key', () => {
+    const sprite: Utils.PIXISprite = Factory.Sprite.createGenericSprite(
+      { foo: 'bar' },
+      {
+        bump: false,
+        velocity: false,
+        d20rpg: false,
+        content: {
+          test: 'test',
+          destroy: () => {},
+        },
+      },
+    );
+
+    const stage = { addChild: (_: any) => {} };
+
+    const group = Factory.Group.createGroup([], {
+      container: stage,
+    });
+
+    group.add(sprite);
+
+    group.remove(0);
+
+    try {
+      group.getSprite(0);
+    } catch (e) {
+      expect(e.message).toBe('pixi-factory: sprite not exists in group');
+    }
+  });
+
+  it('should remove a member in group with a string key', () => {
+    const sprite: Utils.PIXISprite = Factory.Sprite.createGenericSprite(
+      { foo: 'bar' },
+      {
+        bump: false,
+        velocity: false,
+        d20rpg: false,
+        content: {
+          test: 'test',
+          destroy: () => {},
+        },
+      },
+    );
+
+    const stage = { addChild: (_: any) => {} };
+
+    const group = Factory.Group.createGroup([], {
+      container: stage,
+      key: true,
+    });
+
+    group.add(['foo', sprite]);
+
+    group.remove('foo');
+
+    try {
+      group.getSprite('foo');
+    } catch (e) {
+      expect(e.message).toBe('pixi-factory: sprite not exists in group');
+    }
+  });
+
+  it('should not exists a empty member in group in remove method', () => {
+    const sprite: Utils.PIXISprite = Factory.Sprite.createGenericSprite(
+      { foo: 'bar' },
+      {
+        bump: false,
+        velocity: false,
+        d20rpg: false,
+        content: {
+          test: 'test',
+          destroy: () => {},
+        },
+      },
+    );
+
+    const stage = { addChild: (_: any) => {} };
+
+    const group = Factory.Group.createGroup([], {
+      container: stage,
+      key: true,
+    });
+
+    group.add(['foo', sprite]);
+
+    try {
+      group.remove('bar');
+    } catch (e) {
+      expect(e.message).toBe('pixi-factory: not exists element or a duplicated element in a array');
+    }
+  });
 });

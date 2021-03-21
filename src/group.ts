@@ -239,6 +239,30 @@ export class SimpleGroup {
   }
 
   /**
+   *
+   * @param key A key for search in group
+   */
+  public remove(key: PIXIGroupKey) {
+    if (this.__GROUP_KEY) {
+      const _sprite = this.getSprite(key as string);
+
+      this.list = this.list.filter((sprite: PIXISprite) => sprite.__GROUP_KEY !== (key as string));
+      this.container.removeChild(_sprite);
+
+      _sprite.visible = false;
+      _sprite?.destroy();
+    } else {
+      const _sprite = this.getSprite(key as number);
+
+      this.list.splice(key as number, 1);
+      this.container.removeChild(_sprite);
+
+      _sprite.visible = false;
+      _sprite?.destroy();
+    }
+  }
+
+  /**
    * Execute a multiple callback's if the target is collided with a group member.
    *
    * Callbacks are called in order of position in the past array.
