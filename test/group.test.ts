@@ -514,7 +514,7 @@ describe('Factory.Group', () => {
       },
     );
 
-    const stage = { addChild: (_: any) => {} };
+    const stage = { addChild: (_: any) => {}, removeChild: (_: any) => {} };
 
     const group = Factory.Group.createGroup([], {
       container: stage,
@@ -545,7 +545,7 @@ describe('Factory.Group', () => {
       },
     );
 
-    const stage = { addChild: (_: any) => {} };
+    const stage = { addChild: (_: any) => {}, removeChild: (_: any) => {} };
 
     const group = Factory.Group.createGroup([], {
       container: stage,
@@ -559,7 +559,7 @@ describe('Factory.Group', () => {
     try {
       group.getSprite('foo');
     } catch (e) {
-      expect(e.message).toBe('pixi-factory: sprite not exists in group');
+      expect(e.message).toBe('pixi-factory: not exists element or a duplicated element in a array');
     }
   });
 
