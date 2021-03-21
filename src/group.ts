@@ -37,6 +37,9 @@ export class SimpleGroup {
   /** A define group search based in array position member */
   private __NUMBER_KEY = false;
 
+  /** define a debugger border */
+  private __DEBUGGER_LINE = false;
+
   /** a min-max for area active effects. default is min a actually width/height and max is a multiple by 2 */
   private area: PIXIGroupArea;
 
@@ -90,6 +93,9 @@ export class SimpleGroup {
    */
   private setGroup(_list: Array<PIXISprite>, options: PIXISimpleGroupOptions): void {
     this.container = options.container;
+    this.container.pivot.x = this.container.x += this.container.width;
+    this.container.pivot.y = this.container.y += this.container.height;
+
     if (!options.cleanControl) {
       this.setGroupInSprite();
     }
@@ -243,8 +249,8 @@ export class SimpleGroup {
    *
    * ```ts
    * group.E_hitEffect(player_sprite, [
-   *    (sprite_enemy: Utils.PIXISprite) => {
-   *      console.log(sprite_enemy)
+   *    (enemy_sprite: Utils.PIXISprite) => {
+   *      console.log(enemy_sprite)
    *    },
    *    () => {
    *      console.log('hello world');
@@ -273,6 +279,62 @@ export class SimpleGroup {
         }
       }
     });
+  }
+
+  /**
+   * Create a debugger size for actually container render
+   *
+   * @param PIXI A `pixi.js` importer
+   */
+  public A_debugger(PIXI: any) {
+    const _min = new PIXI.Graphics();
+    _min.clear();
+    _min.lineStyle(5, 0x0095c1, 1);
+    _min.beginFill(0x000000, 0);
+    _min.drawRect(this.container.x, this.container.y, this.area.min.width, this.area.min.height);
+    _min.endFill();
+
+    const _max = new PIXI.Graphics();
+    _max.clear();
+    _max.lineStyle(5, 0xc10000, 1);
+    _max.beginFill(0x000000, 0);
+    _max.drawRect(
+      this.container.x - this.container.width / 2,
+      this.container.y - this.container.height / 2,
+      this.area.max.width,
+      this.area.max.height,
+    );
+    _max.endFill();
+
+    const _style_min = new PIXI.TextStyle({
+      fill: 0x0095c1,
+      fontWeight: 'bold',
+      fontSize: 16,
+    });
+    const _style_max = new PIXI.TextStyle({
+      fill: 0xc10000,
+      fontWeight: 'bold',
+      fontSize: 16,
+    });
+    const _min_text = new PIXI.Text('Min Area', _style_min);
+    const _max_text = new PIXI.Text('Max Area', _style_max);
+
+    if (!this.__DEBUGGER_LINE) {
+      this.container.debuggerMin = _min;
+      this.container.debuggerMax = _max;
+      this.container.debuggerMinText = _min_text;
+      this.container.debuggerMaxText = _max_text;
+
+      this.container.addChild(_min);
+      this.container.addChild(_min_text);
+      this.container.addChild(_max);
+      this.container.addChild(_max_text);
+
+      _min_text.y += this.area.min.height;
+      _max_text.y += this.area.min.height + this.area.min.height / 2;
+    }
+
+    this.__DEBUGGER_LINE = true;
   }
 }
 
