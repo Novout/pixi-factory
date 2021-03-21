@@ -227,7 +227,7 @@ export class SimpleGroup {
    *
    * @param sprite A new `Factory.Sprite` insert in a group array
    */
-  public newSprite(sprite: PIXISpriteGroup) {
+  public add(sprite: PIXISpriteGroup) {
     if (this.__GROUP_KEY) {
       const _sprite = sprite as PIXISpriteGroupKey;
       (_sprite[1] as PIXISprite).__GROUP_KEY = _sprite[0] as string;

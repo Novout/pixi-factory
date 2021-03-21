@@ -121,7 +121,7 @@ describe('Factory.Group', () => {
     const group = Factory.Group.createGroup([], { container: stage, key: false });
 
     try {
-      group.newSprite(['foo', sprite]);
+      group.add(['foo', sprite]);
     } catch (e) {
       expect(e.message).toBe('pixi-factory: sprite not exists in group');
     }
@@ -226,7 +226,7 @@ describe('Factory.Group', () => {
 
     const group = Factory.Group.createGroup([], { container: stage });
 
-    group.newSprite(sprite);
+    group.add(sprite);
 
     expect(group.getSprite(0)).toBeTruthy();
   });
@@ -238,7 +238,7 @@ describe('Factory.Group', () => {
 
     const group = Factory.Group.createGroup([], { container: stage, key: true });
 
-    group.newSprite(['foo', sprite]);
+    group.add(['foo', sprite]);
 
     expect(group.getSprite('foo')).toBeTruthy();
   });
@@ -250,7 +250,7 @@ describe('Factory.Group', () => {
 
     const group = Factory.Group.createGroup([], { container: stage, key: false });
 
-    group.newSprite([sprite]);
+    group.add([sprite]);
 
     try {
       group.getSprite('foo');
@@ -266,7 +266,7 @@ describe('Factory.Group', () => {
 
     const group = Factory.Group.createGroup([], { container: stage, key: true });
 
-    group.newSprite(['foo', sprite]);
+    group.add(['foo', sprite]);
 
     try {
       group.getSprite(0);
@@ -297,7 +297,7 @@ describe('Factory.Group', () => {
 
     const group = Factory.Group.createGroup([], { container: stage, key: true });
 
-    group.newSprite(['foo', foo]);
+    group.add(['foo', foo]);
 
     try {
       group.E_hitEffect(bar, [
@@ -318,8 +318,8 @@ describe('Factory.Group', () => {
 
     const group = Factory.Group.createGroup([], { container: stage, key: false });
 
-    group.newSprite(foo);
-    group.newSprite(bar);
+    group.add(foo);
+    group.add(bar);
 
     try {
       group.E_hitEffect(bar, [
@@ -354,8 +354,8 @@ describe('Factory.Group', () => {
 
     const group = Factory.Group.createGroup([], { container: stage, key: true });
 
-    group.newSprite(['foo', foo]);
-    group.newSprite(['bar', bar]);
+    group.add(['foo', foo]);
+    group.add(['bar', bar]);
 
     try {
       group.E_hitEffect(bar, [
@@ -390,8 +390,8 @@ describe('Factory.Group', () => {
 
     const group = Factory.Group.createGroup([], { container: stage, key: true });
 
-    group.newSprite(['foo', foo]);
-    group.newSprite(['bar', bar]);
+    group.add(['foo', foo]);
+    group.add(['bar', bar]);
 
     try {
       group.E_hitEffect(bar, [
@@ -429,8 +429,8 @@ describe('Factory.Group', () => {
 
     const group = Factory.Group.createGroup([], { container: stage, key: true });
 
-    group.newSprite(['foo', foo]);
-    group.newSprite(['bar', bar]);
+    group.add(['foo', foo]);
+    group.add(['bar', bar]);
 
     group.E_hitEffect(foo, [
       (_bar: Utils.PIXISprite) => {
