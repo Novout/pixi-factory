@@ -239,6 +239,17 @@ export class SimpleGroup {
   }
 
   /**
+   * Remove a existent sprite in a group
+   *
+   * ```ts
+   * // ...
+   * group.add(sprite);
+   *
+   * setTimeout(() => {
+   *   group.remove(0);
+   * }, 2000);
+   * // ...
+   * ```
    *
    * @param key A key for search in group
    */
