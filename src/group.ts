@@ -9,7 +9,9 @@ import {
 } from './types';
 
 /**
- * The default group generate for createGroup function
+ * The default group generate for createGroup function.
+ *
+ * It is recommended to use the group using as keys to facilitate the handling of removing / adding new sprites in the group.
  *
  * ```ts
  * import * as PIXI from 'pixi.js';
@@ -18,7 +20,7 @@ import {
  * function setup() {
  *  const sprite: Utils.PIXISprite = Factory.Sprite.createGenericSprite(new PIXI.Sprite(resources.example.texture));
  *  const group: SimpleGroup = Factory.Group.createGroup([ sprite ], { container: app.stage });
- *   // ...
+ *  // ...
  * }
  * ```
  *
