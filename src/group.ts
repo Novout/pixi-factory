@@ -27,22 +27,34 @@ import {
  * @class
  */
 export class SimpleGroup {
-  /** A sprite list belonging in group */
+  /** A sprite list belonging in group
+   * @ignore
+   */
   private list: Array<PIXISprite>;
 
-  /** A `PIXI.Container` required */
+  /** A `PIXI.Container` required
+   * @ignore
+   */
   private container: any;
 
-  /** A define group search based in key members */
+  /** A define group search based in key members
+   * @ignore
+   */
   private __GROUP_KEY = false;
 
-  /** A define group search based in array position member */
+  /** A define group search based in array position member
+   * @ignore
+   */
   private __NUMBER_KEY = false;
 
-  /** define a debugger border */
+  /** define a debugger border
+   * @ignore
+   */
   private __DEBUGGER_LINE = false;
 
-  /** a min-max for area active effects. default is min a actually width/height and max is a multiple by 2 */
+  /** a min-max for area active effects. default is min a actually width/height and max is a multiple by 2
+   * @ignore
+   */
   private area: PIXIGroupArea;
 
   /**
@@ -63,6 +75,7 @@ export class SimpleGroup {
    *
    * @param _list A `PIXI.Sprite` or a `Factory.Sprite` array.
    * @param options Options for create a group sprite.
+   * @ignore
    */
   private keySetter(_list: Array<PIXISpriteGroupKey>, options: PIXISimpleGroupOptions): void {
     this.list = [];
@@ -80,6 +93,7 @@ export class SimpleGroup {
    *
    * @param _list A `PIXI.Sprite` or a `Factory.Sprite` array.
    * @param options Options for create a group sprite.
+   * @ignore
    */
   private defaultSetter(_list: Array<PIXISprite>, options: PIXISimpleGroupOptions): void {
     this.list = _list;
@@ -92,6 +106,7 @@ export class SimpleGroup {
    *
    * @param _list A `PIXI.Sprite` or a `Factory.Sprite` array.
    * @param options Options for create a group sprite.
+   * @ignore
    */
   private setGroup(_list: Array<PIXISprite>, options: PIXISimpleGroupOptions): void {
     this.container = options.container;
@@ -127,6 +142,7 @@ export class SimpleGroup {
 
   /**
    * Set a `_simpleGroupAdded` in a sprite object.
+   * @ignore
    */
   private setGroupInSprite(): void {
     this.list.map((sprite: PIXISprite) => (sprite._simpleGroupAdded = true));
@@ -318,6 +334,10 @@ export class SimpleGroup {
 
   /**
    * Create a debugger size for actually container render
+   *
+   * ```ts
+   * group.A_debugger(PIXI);
+   * ```
    *
    * @param PIXI A `pixi.js` importer
    */

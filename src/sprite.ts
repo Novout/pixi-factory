@@ -43,6 +43,7 @@ export class PSprite {
    * A return pixi-sprite environment
    *
    * @private
+   * @ignore
    */
   private _sprite: Maybe<PIXISprite>;
 
@@ -118,6 +119,7 @@ export class PSprite {
    * Add colision in local pixi-sprite based on pixi-bump
    *
    * @private
+   * @ignore
    */
   private addCollisionProperties(): this {
     if (!this._sprite) throw new Error('pixi-factory: sprite as null or undefined.');
@@ -165,6 +167,7 @@ export class PSprite {
    * Add velocity properties in local pixi-sprite
    *
    * @private
+   * @ignore
    */
   private addVelocityProperties(): this {
     if (!this._sprite) throw new Error('pixi-factory: sprite as null or undefined.');
@@ -268,6 +271,7 @@ export class PSprite {
    * Add d20 Generic System properties in local pixi-sprite
    *
    * @private
+   * @ignore
    */
   private addOpenRPGProperties(): this {
     if (!this._sprite) throw new Error('pixi-factory: sprite as null or undefined.');
