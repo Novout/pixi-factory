@@ -28,10 +28,10 @@ import GSAP, { Expo } from 'gsap';
  * // or
  *
  * import * as PIXI from 'pixi.js';
- * import { PSprite } from 'pixi-factory';
+ * import { Sprite } from 'pixi-factory';
  * // ...
  * function setup() {
- *   const sprite = new PSprite().createGenericSprite(new PIXI.Sprite(resources.example.texture));
+ *   const sprite = new Sprite().createGenericSprite(new PIXI.Sprite(resources.example.texture));
  *   // ...
  * }
  * ```

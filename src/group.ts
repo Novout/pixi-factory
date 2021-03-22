@@ -15,11 +15,11 @@ import {
  *
  * ```ts
  * import * as PIXI from 'pixi.js';
- * import Factory, { Utils, SimpleGroup } from 'pixi-factory';
+ * import Factory, { Utils, Group } from 'pixi-factory';
  * // ...
  * function setup() {
  *  const sprite: Utils.PIXISprite = Factory.Sprite.createGenericSprite(new PIXI.Sprite(resources.example.texture));
- *  const group: SimpleGroup = Factory.Group.createGroup([ sprite ], { container: app.stage });
+ *  const group: Group = Factory.Group.createGroup([ sprite ], { container: app.stage });
  *  // ...
  * }
  * ```

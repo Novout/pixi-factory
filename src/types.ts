@@ -84,22 +84,34 @@ export interface PIXISprite extends PIXIDefaultSprite {
   /** A base properties */
   base?: PIXISpriteOpenRPG;
 
-  /** `true` hability pixi-bump properties */
+  /** `true` hability pixi-bump properties
+   * @ignore
+   */
   _bumpPropertiesAdded?: boolean;
 
-  /** `true` hability a velocity properties */
+  /** `true` hability a velocity properties
+   * @ignore
+   */
   _velocityPropertiesAdded?: boolean;
 
-  /** `true` hability a generic d20 properties */
+  /** `true` hability a generic d20 properties
+   * @ignore
+   */
   _d20RPGPropertiesAdded?: boolean;
 
-  /** `true` hability simple group control */
+  /** `true` hability simple group control
+   * @ignore
+   */
   _simpleGroupAdded?: boolean;
 
-  /** a key at Factory.Group member */
+  /** a key at Factory.Group member
+   * @ignore
+   */
   __GROUP_KEY?: string;
 
-  /** a key at Factory.Group member */
+  /** a key at Factory.Group member
+   * @ignore
+   */
   __NUMBER_KEY?: number;
 }
 
@@ -109,7 +121,9 @@ export interface PIXISprite extends PIXIDefaultSprite {
  * @type {Interface}
  */
 export interface PIXISpriteVelocity {
+  /** @ignore */
   __KNOCKBACK_HIT?: boolean;
+
   /** `true` allows movement sprite */
   movement: boolean;
 

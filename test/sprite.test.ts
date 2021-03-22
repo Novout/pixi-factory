@@ -4,7 +4,7 @@
 
 //@ts-ignore
 import * as PIXI from 'pixi.js';
-import Factory, { PSprite, Utils } from '../src/index';
+import Factory, { Sprite, Utils } from '../src/index';
 
 describe('Factory.Sprite', () => {
   beforeEach(() => {
@@ -41,8 +41,8 @@ describe('Factory.Sprite', () => {
     });
   });
 
-  it('should exists factory sprite with PSprite instance', () => {
-    const sprite: Utils.PIXISprite = new PSprite().createGenericSprite(
+  it('should exists factory sprite with Sprite instance', () => {
+    const sprite: Utils.PIXISprite = new Sprite().createGenericSprite(
       { foo: 'bar' },
       {
         bump: true,
@@ -54,14 +54,14 @@ describe('Factory.Sprite', () => {
     expect(sprite).toHaveProperty('_bumpPropertiesAdded');
   });
 
-  it('should exists factory sprite with PIXI.Sprite and PSprite instance', () => {
+  it('should exists factory sprite with PIXI.Sprite and Sprite instance', () => {
     const app = new PIXI.Application();
     document.body.appendChild(app.view);
 
     app.loader.add('example', '_.jpg').load((loader, resources) => {
       const example = new PIXI.Sprite(resources['example']!.texture);
 
-      const sprite: Utils.PIXISprite = new PSprite().createGenericSprite(example, {
+      const sprite: Utils.PIXISprite = new Sprite().createGenericSprite(example, {
         bump: true,
         velocity: true,
         d20rpg: true,
@@ -441,14 +441,14 @@ describe('Factory.Sprite', () => {
     expect(sprite.foo).toBe('bar');
   });
 
-  it('should exists factory specific sprite with PSprite instance', () => {
-    const sprite: Utils.PIXISprite = new PSprite().createSpecificSprite({ name: 'guest001' }, { foo: 'bar' });
+  it('should exists factory specific sprite with Sprite instance', () => {
+    const sprite: Utils.PIXISprite = new Sprite().createSpecificSprite({ name: 'guest001' }, { foo: 'bar' });
 
     expect(sprite).toHaveProperty('foo', 'bar');
   });
 
-  it('should overload sprite definitions in specific create sprite in a PSprite instance', () => {
-    const sprite: Utils.PIXISprite = new PSprite().createSpecificSprite({ name: 'guest001' }, { name: 'guest002' });
+  it('should overload sprite definitions in specific create sprite in a Sprite instance', () => {
+    const sprite: Utils.PIXISprite = new Sprite().createSpecificSprite({ name: 'guest001' }, { name: 'guest002' });
 
     expect(sprite).toHaveProperty('name', 'guest002');
   });
