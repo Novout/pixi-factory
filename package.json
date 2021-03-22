@@ -7,14 +7,17 @@
   "main": "lib/index.js",
   "module": "lib/index.esm.js",
   "types": "lib/index.d.ts",
+  "contributors": [
+    "Giovane Cardoso <gcnovout@gmail.com>"
+  ],
   "repository": {
     "type": "git",
     "url": "https://github.com/Novout/pixi-factory"
   },
   "scripts": {
-    "build": "rollup -c",
+    "build": "rm -rf ./lib && rollup -c",
     "lint": "eslint src/**/*.{js,ts,tsx} --fix && pretty-quick",
-    "docs": "typedoc",
+    "docs": "rm -rf ./docs && typedoc",
     "test": "jest"
   },
   "keywords": [
