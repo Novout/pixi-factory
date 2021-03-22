@@ -1,5 +1,6 @@
 
 {
   "entryPoints": ["src/index.ts"],
+  "exclude": ["**/node_modules/**", "**/*.spec.ts", "**/test/**"],
   "out": "docs"
 }
