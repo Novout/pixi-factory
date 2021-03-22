@@ -38,7 +38,7 @@ export interface PIXIDefaultSprite {
  *
  * ```js
  * import * as PIXI from 'pixi.js';
- * import { PSprite, Utils } from 'pixi-factory';
+ * import { Sprite, Utils } from 'pixi-factory';
  * // ...
  * function setup() {
  *   const sprite: Utils.PIXISprite = new PSprite().createGenericSprite(new PIXI.Sprite(resources.example.texture));
