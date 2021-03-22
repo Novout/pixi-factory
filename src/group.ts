@@ -138,6 +138,10 @@ export class SimpleGroup {
     } else {
       this.area = options.area;
     }
+
+    if (options.random) {
+      this.generateRandom();
+    }
   }
 
   /**
@@ -146,6 +150,21 @@ export class SimpleGroup {
    */
   private setGroupInSprite(): void {
     this.list.map((sprite: PIXISprite) => (sprite._simpleGroupAdded = true));
+  }
+
+  /**
+   *
+   */
+  private generateRandom() {
+    this.list.map((sprite: PIXISprite) => {
+      const max = {
+        x: this.container.x + this.area.min.width - sprite.width,
+        y: this.container.y + this.area.min.height - sprite.height,
+      };
+
+      sprite.x = Math.random() * max.x;
+      sprite.y = Math.random() * max.y;
+    });
   }
 
   /**
@@ -346,19 +365,14 @@ export class SimpleGroup {
     _min.clear();
     _min.lineStyle(5, 0x0095c1, 1);
     _min.beginFill(0x000000, 0);
-    _min.drawRect(this.container.x, this.container.y, this.area.min.width, this.area.min.height);
+    _min.drawRect(0, 0, this.area.min.width, this.area.min.height);
     _min.endFill();
 
     const _max = new PIXI.Graphics();
     _max.clear();
     _max.lineStyle(5, 0xc10000, 1);
     _max.beginFill(0x000000, 0);
-    _max.drawRect(
-      this.container.x - this.container.width / 2,
-      this.container.y - this.container.height / 2,
-      this.area.max.width,
-      this.area.max.height,
-    );
+    _max.drawRect(-this.area.max.width / 4, -this.area.max.height / 4, this.area.max.width, this.area.max.height);
     _max.endFill();
 
     const _style_min = new PIXI.TextStyle({

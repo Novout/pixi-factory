@@ -388,6 +388,9 @@ export interface PIXISimpleGroupOptions {
 
   /** a definition for min and max size for effects */
   area?: PIXIGroupArea;
+
+  /** `true` random a sprites position in container */
+  random?: boolean;
 }
 
 export interface PIXIGroupAreaSize {
