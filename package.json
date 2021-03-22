@@ -16,8 +16,10 @@
   },
   "scripts": {
     "build": "rm -rf ./lib && rollup -c",
+    "win:build": "rollup -c",
     "lint": "eslint src/**/*.{js,ts,tsx} --fix && pretty-quick",
     "docs": "rm -rf ./docs && typedoc --options typedoc.json --theme ./node_modules/typedoc-neo-theme/bin/default",
+    "win:docs": "typedoc --options typedoc.json --theme ./node_modules/typedoc-neo-theme/bin/default",
     "test": "jest",
     "publish": "npm run build && npm publish"
   },
