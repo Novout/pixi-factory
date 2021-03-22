@@ -1,6 +1,11 @@
-
 {
   "entryPoints": ["src/index.ts"],
   "exclude": ["**/node_modules/**", "**/*.spec.ts", "**/test/**"],
-  "out": "docs"
+  "out": "docs",
+  "links": [
+    {
+      "label": "Examples",
+      "url": "https://github.com/Novout/pixi-factory/tree/main/examples/"
+    }
+  ]
 }
