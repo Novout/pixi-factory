@@ -1,3 +1,4 @@
+import { hitTestRectangle } from './contain';
 import {
   PIXISprite,
   PIXISimpleGroupOptions,
@@ -115,11 +116,6 @@ export class SimpleGroup {
       this.setGroupInSprite();
     }
 
-    if (options.size) {
-      this.container.width = options.size.width;
-      this.container.height = options.size.height;
-    }
-
     if (options.position) {
       if (options.position.length === 2) {
         this.container.position.set(options.position[0], options.position[1]);
@@ -131,6 +127,11 @@ export class SimpleGroup {
     this.list.forEach((sprite: PIXISprite) => {
       this.container.addChild(sprite);
     });
+
+    if (options.size) {
+      this.container.width = options.size.width;
+      this.container.height = options.size.height;
+    }
 
     if (!options.area) {
       this.area.min = { width: this.container.width, height: this.container.height };
@@ -153,13 +154,13 @@ export class SimpleGroup {
   }
 
   /**
-   *
+   * @ignore
    */
   private generateRandom() {
     this.list.map((sprite: PIXISprite) => {
       const max = {
-        x: this.container.x + this.area.min.width - sprite.width,
-        y: this.container.y + this.area.min.height - sprite.height,
+        x: this.area.min.width - sprite.width,
+        y: this.area.min.height - sprite.height,
       };
 
       sprite.x = Math.random() * max.x;
@@ -352,6 +353,90 @@ export class SimpleGroup {
   }
 
   /**
+   *
+   * Execute a callback target pertencent a min group area
+   *
+   * ```ts
+   * group.E_inMinArea(player_sprite, [
+   *    () => {
+   *      console.log('hello', player_sprite.__TARGET_IN_GROUP_MIN_AREA)
+   *    }
+   * ]);
+   *```
+   *
+   * @param target A target compare in hit a group sprites
+   * @param execute A list for callback execute in a hit effect
+   */
+  public E_inMinArea(target: PIXISprite, execute: Array<() => void>): void {
+    if (!target._bumpPropertiesAdded) throw new Error('pixi-factory: bump not added in E_inMinArea sprite');
+
+    if (!((target.__GROUP_KEY && this.__GROUP_KEY) || (target.__NUMBER_KEY && this.__NUMBER_KEY))) {
+      if (
+        hitTestRectangle(
+          {
+            _bumpPropertiesAdded: true,
+            x: this.container.x,
+            y: this.container.y,
+            width: this.area.min.width,
+            height: this.area.min.height,
+          },
+          target,
+        )
+      ) {
+        target.__TARGET_IN_GROUP_MIN_AREA = true;
+
+        execute.forEach((cb: () => void) => {
+          cb && cb();
+        });
+      } else {
+        target.__TARGET_IN_GROUP_MIN_AREA = false;
+      }
+    }
+  }
+
+  /**
+   *
+   * Execute a callback target pertencent a max group area
+   *
+   * ```ts
+   * group.E_inMaxArea(player_sprite, [
+   *    () => {
+   *      console.log('hello', player_sprite.__TARGET_IN_GROUP_MAX_AREA)
+   *    }
+   * ]);
+   *```
+   *
+   * @param target A target compare in hit a group sprites
+   * @param execute A list for callback execute in a hit effect
+   */
+  public E_inMaxArea(target: PIXISprite, execute: Array<() => void>): void {
+    if (!target._bumpPropertiesAdded) throw new Error('pixi-factory: bump not added in E_inMaxArea sprites');
+
+    if (!((target.__GROUP_KEY && this.__GROUP_KEY) || (target.__NUMBER_KEY && this.__NUMBER_KEY))) {
+      if (
+        hitTestRectangle(
+          {
+            _bumpPropertiesAdded: true,
+            x: this.container.x - this.area.max.width / 4,
+            y: this.container.y - this.area.max.height / 4,
+            width: this.area.max.width,
+            height: this.area.max.height,
+          },
+          target,
+        )
+      ) {
+        target.__TARGET_IN_GROUP_MAX_AREA = true;
+
+        execute.forEach((cb: () => void) => {
+          cb && cb();
+        });
+      } else {
+        target.__TARGET_IN_GROUP_MAX_AREA = false;
+      }
+    }
+  }
+
+  /**
    * Create a debugger size for actually container render
    *
    * ```ts
@@ -413,6 +498,7 @@ export class SimpleGroup {
  * ```js
  * import * as PIXI from 'pixi.js';
  * import Factory from 'pixi-factory';
+import { hitTestRectangle } from './contain';
  * // ...
  * function setup() {
  *  const sprite = Factory.Sprite.createGenericSprite(new PIXI.Sprite(resources.example.texture));

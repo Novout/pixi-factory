@@ -567,13 +567,9 @@ describe('Factory.Group', () => {
     const sprite: Utils.PIXISprite = Factory.Sprite.createGenericSprite(
       { foo: 'bar' },
       {
-        bump: false,
+        bump: true,
         velocity: false,
         d20rpg: false,
-        content: {
-          test: 'test',
-          destroy: () => {},
-        },
       },
     );
 
@@ -590,6 +586,160 @@ describe('Factory.Group', () => {
       group.remove('bar');
     } catch (e) {
       expect(e.message).toBe('pixi-factory: not exists element or a duplicated element in a array');
+    }
+  });
+
+  it('should random sprite position in a group', () => {
+    const sprite: Utils.PIXISprite = Factory.Sprite.createGenericSprite(
+      { foo: 'bar' },
+      {
+        bump: true,
+        velocity: false,
+        d20rpg: false,
+        content: {
+          x: 0,
+          y: 0,
+          width: 50,
+          height: 50,
+        },
+      },
+    );
+
+    const stage = { width: 100, height: 100, x: 0, y: 0, addChild: (_: any) => {} };
+
+    const group = Factory.Group.createGroup([], {
+      container: stage,
+      key: true,
+      random: true,
+    });
+
+    group.add(['foo', sprite]);
+
+    expect(group.getSprite('foo').x).toBe(0);
+    expect(group.getSprite('foo').y).toBe(0);
+  });
+
+  it('should sprite in a min group area', () => {
+    const sprite: Utils.PIXISprite = Factory.Sprite.createGenericSprite(
+      { foo: 'bar' },
+      {
+        bump: true,
+        velocity: false,
+        d20rpg: false,
+      },
+    );
+
+    const stage = { addChild: (_: any) => {} };
+
+    const group = Factory.Group.createGroup([sprite], {
+      container: stage,
+      key: false,
+    });
+
+    try {
+      group.E_inMinArea(sprite, [
+        () => {
+          throw new Error('here');
+        },
+      ]);
+    } catch (e) {
+      expect(e.message).toBe('here');
+    }
+  });
+
+  it('should sprite in a max group area', () => {
+    const sprite: Utils.PIXISprite = Factory.Sprite.createGenericSprite(
+      { foo: 'bar' },
+      {
+        bump: true,
+        velocity: false,
+        d20rpg: false,
+        content: {
+          test: 'test',
+          destroy: () => {},
+        },
+      },
+    );
+
+    const stage = { addChild: (_: any) => {} };
+
+    const group = Factory.Group.createGroup([sprite], {
+      container: stage,
+      key: false,
+    });
+
+    try {
+      group.E_inMaxArea(sprite, [
+        () => {
+          throw new Error('here');
+        },
+      ]);
+    } catch (e) {
+      expect(e.message).toBe('here');
+    }
+  });
+
+  it('should not bump sprite in a min group area', () => {
+    const sprite: Utils.PIXISprite = Factory.Sprite.createGenericSprite(
+      { foo: 'bar' },
+      {
+        bump: false,
+        velocity: false,
+        d20rpg: false,
+        content: {
+          test: 'test',
+          destroy: () => {},
+        },
+      },
+    );
+
+    const stage = { addChild: (_: any) => {} };
+
+    const group = Factory.Group.createGroup([sprite], {
+      container: stage,
+      key: false,
+    });
+
+    try {
+      group.E_inMinArea(sprite, [
+        () => {
+          throw new Error('here');
+        },
+      ]);
+    } catch (e) {
+      expect(e.message).toBe('pixi-factory: bump not added in E_inMinArea sprite');
+    }
+  });
+
+  it('should not bump sprite in a max group area', () => {
+    const sprite: Utils.PIXISprite = Factory.Sprite.createGenericSprite(
+      { foo: 'bar' },
+      {
+        bump: false,
+        velocity: false,
+        d20rpg: false,
+        content: {
+          test: 'test',
+          destroy: () => {},
+        },
+      },
+    );
+
+    const stage = { addChild: (_: any) => {} };
+
+    const group = Factory.Group.createGroup([sprite], {
+      container: stage,
+      key: false,
+    });
+
+    try {
+      group.E_inMaxArea(sprite, [
+        () => {
+          throw new Error('here');
+        },
+      ]);
+    } catch (e) {
+      expect(e.message).toBe('pixi-factory: bump not added in E_inMaxArea sprites');
     }
   });
 });
