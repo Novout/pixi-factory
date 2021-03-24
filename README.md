@@ -4,7 +4,6 @@
 
 A superset for creating and handling Pixi.js resources
 
-- `pixi-factory` does not yet have an npm package, if you already want to use this library, see the FAQ at the end of this markdown.
 - [Documentation is here](https://pixi-factory.vercel.app/)
 
 ## Usage
@@ -25,10 +24,15 @@ const app = new PIXI.Application();
 document.body.appendChild(app.view);
 
 app.loader.add('example', 'example.jpg').load((loader, resources) => {
-  const example = Factory.Sprite.createGenericSprite(new PIXI.Sprite(resources.example.texture), {
+  const example = Factory.Sprite.create(new PIXI.Sprite(resources.example.texture), {
     bump: true, // hability a collision properties
     velocity: true, // hability a velocity base content
     d20rpg: true, // hability a standard d20 rpg
+    content: {
+      // append or override content in a base sprite properties
+      x: 100,
+      y: 100,
+    },
   });
 
   console.log(example.velocity); // a velocity content
@@ -40,17 +44,6 @@ app.loader.add('example', 'example.jpg').load((loader, resources) => {
 });
 ```
 
-#### Creating a Specific Sprite
-
-This way you will attach the entire object passed in the options at the root of the desired object.
-
-```ts
-import * as PIXI from 'pixi.js';
-import Factory from 'pixi-factory';
-
-const sprite = Factory.Sprite.createSpecificSprite(new PIXI.Sprite(resources.example.texture), { foo: 'bar' });
-```
-
 ##### Generic Sprites
 
 The creation functions expect only a generic object with a key in `string`, so that the methods are not directly dependent on PIXI, being able to create external objects.
@@ -58,7 +51,7 @@ The creation functions expect only a generic object with a key in `string`, so t
 ```ts
 import Factory from 'pixi-factory';
 
-const sprite = Factory.Sprite.createSpecificSprite({ name: 'guest001' }, { foo: 'bar' });
+const sprite = Factory.Sprite.create({ name: 'guest001' }, { foo: 'bar' });
 ```
 
 The internal methods are also generic, waiting to receive the sprite that is being instantiated, modifying the internal methods. It is not a directly safe approach because it is changeable, but it makes it easy to handle objects without the need for an ECS.
@@ -67,7 +60,7 @@ The internal methods are also generic, waiting to receive the sprite that is bei
 import * as PIXI from 'pixi.js';
 import Factory from 'pixi-factory';
 
-const example = Factory.Sprite.createGenericSprite(new PIXI.Sprite(resources.example.texture), {
+const example = Factory.Sprite.create(new PIXI.Sprite(resources.example.texture), {
   bump: true,
   velocity: true,
   d20rpg: true,
@@ -98,56 +91,31 @@ sprite.velocity.A_knockbackHit(sprite);
 ##### Events
 
 ```ts
-// example utilizing a pixi-controller package
 import * as PIXI from 'pixi.js';
-import Controller, { BUTTON, PLAYER } from 'pixi-controller';
 import Factory from 'pixi-factory';
 
 const app = new PIXI.Application();
 document.body.appendChild(app.view);
 
 app.loader.add('example', 'example.jpg').load((loader, resources) => {
-  const a = Factory.Sprite.createGenericSprite(new PIXI.Sprite(resources.example.texture), {
+  const a = Factory.Sprite.create(new PIXI.Sprite(resources.example.texture), {
     bump: true,
     velocity: true,
     d20rpg: true,
   });
 
-  const b = Factory.Sprite.createGenericSprite(new PIXI.Sprite(resources.example.texture), {
+  const b = Factory.Sprite.create(new PIXI.Sprite(resources.example.texture), {
     bump: true,
     velocity: true,
     d20rpg: true,
   });
 
-  const group = Factory.Group.createGroup(
-    [
-      ['example1', a],
-      ['example2', b],
-    ],
-    {
-      container: app.stage,
-      key: true,
-    },
-  );
-
-  a.width = 50;
-  a.height = 50;
-
-  b.width = 50;
-  b.height = 50;
-  b.x = 100;
-  b.y = 100;
+  app.stage.addChild(a);
+  app.stage.addChild(b);
 
   app.ticker.add(() => {
-    if (Controller.Keyboard.isKeyDown(...PLAYER.LEFT)) group.getSprite('example1').x -= 1;
-    if (Controller.Keyboard.isKeyDown(...PLAYER.RIGHT)) group.getSprite('example1').x += 1;
-    if (Controller.Keyboard.isKeyDown(...PLAYER.UP)) group.getSprite('example1').y -= 1;
-    if (Controller.Keyboard.isKeyDown(...PLAYER.DOWN)) group.getSprite('example1').y += 1;
-
-    /* E_hit in a ticker call */
-    console.log(group.getSprite('example1').base.E_hit(a, b, { type: 'rectangle' }));
-
-    Controller.update();
+    /* Return a boolean */
+    console.log(a.base.E_hit(a, b, { type: 'rectangle' }));
   });
 });
 ```
@@ -163,21 +131,21 @@ import * as PIXI from 'pixi.js';
 import Factory from 'pixi-factory';
 // ...
 function setup() {
-  const sprite = Factory.Sprite.createGenericSprite(new PIXI.Sprite(resources.example.texture));
-  const group = Factory.Group.createGroup([sprite], { container: app.stage });
+  const sprite = Factory.Sprite.create(new PIXI.Sprite(resources.example.texture));
+  const group = Factory.Group.create([sprite], { container: app.stage });
 
   // or
 
-  const group = Factory.Group.createGroup(
+  const wolfs = Factory.Group.create(
     [
-      ['wolf1', Factory.Sprite.createGenericSprite(new PIXI.Sprite(resources.wolf.texture))],
-      ['wolf2', Factory.Sprite.createGenericSprite(new PIXI.Sprite(resources.wolf.texture))],
-      ['wolf3', Factory.Sprite.createGenericSprite(new PIXI.Sprite(resources.wolf.texture))],
+      ['wolf1', Factory.Sprite.create(new PIXI.Sprite(resources.wolf.texture))],
+      ['wolf2', Factory.Sprite.create(new PIXI.Sprite(resources.wolf.texture))],
+      ['wolf3', Factory.Sprite.create(new PIXI.Sprite(resources.wolf.texture))],
     ],
     { container: app.stage, key: true },
   );
 
-  console.log(group.getSprite('wolf1'));
+  console.log(wolfs.getSprite('wolf1'));
 }
 ```
 
@@ -195,11 +163,11 @@ const app = new PIXI.Application();
 document.body.appendChild(app.view);
 
 app.loader.add('example', 'example.jpg').load((loader, resources) => {
-  const _example = Factory.Sprite.createGenericSprite(new PIXI.Sprite(resources.example.texture), {
+  const _example = Factory.Sprite.create(new PIXI.Sprite(resources.example.texture), {
     bump: true,
     velocity: true,
   });
-  const group = Factory.Group.createGroup([['example', _example]], { container: app.stage, key: true });
+  const group = Factory.Group.create([['example', _example]], { container: app.stage, key: true });
   Controller.Mouse.prevent(BUTTON.RIGHT);
 
   app.ticker.add(() => {
@@ -220,7 +188,7 @@ All interfaces and types are exported with the `Utils` namespace, thus being abl
 ```ts
 import Factory, { Utils } from 'pixi-factory';
 
-const sprite: Utils.PIXISprite = Factory.Sprite.createGenericSprite(example, {
+const sprite: Utils.PIXISprite = Factory.Sprite.create(example, {
   bump: true,
   velocity: true,
   d20rpg: true,

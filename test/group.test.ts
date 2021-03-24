@@ -14,7 +14,7 @@ describe('Factory.Group', () => {
   it('should create a empty group', () => {
     const stage = { addChild: (_: any) => {} };
 
-    const group = Factory.Group.createGroup([], { container: stage });
+    const group = Factory.Group.create([], { container: stage });
 
     expect(group).toBeTruthy();
   });
@@ -23,7 +23,7 @@ describe('Factory.Group', () => {
     const stage = { addChild: (_: any) => {} };
 
     try {
-      Factory.Group.createGroup([], { container: stage }).getSprite(0);
+      Factory.Group.create([], { container: stage }).getSprite(0);
     } catch (e) {
       expect(e.message).toBe('pixi-factory: sprite not exists in group');
     }
@@ -34,7 +34,7 @@ describe('Factory.Group', () => {
 
     const stage = { addChild: (_: any) => {} };
 
-    const group = Factory.Group.createGroup([sprite], { container: stage });
+    const group = Factory.Group.create([sprite], { container: stage });
 
     expect(group.getSprite(0)).toBeTruthy();
   });
@@ -45,7 +45,7 @@ describe('Factory.Group', () => {
     const stage = { addChild: (_: any) => {} };
 
     try {
-      const group = Factory.Group.createGroup([sprite], { container: stage });
+      const group = Factory.Group.create([sprite], { container: stage });
 
       group.getSprite(1);
     } catch (e) {
@@ -60,7 +60,7 @@ describe('Factory.Group', () => {
 
     const stage = { addChild: (_: any) => {} };
 
-    const group = Factory.Group.createGroup([foo, bar, lett], { container: stage });
+    const group = Factory.Group.create([foo, bar, lett], { container: stage });
 
     expect(group.getSprites().length).toBe(3);
   });
@@ -70,7 +70,7 @@ describe('Factory.Group', () => {
 
     const stage = { addChild: (_: any) => {} };
 
-    const group = Factory.Group.createGroup([['test', sprite]], { container: stage, key: true });
+    const group = Factory.Group.create([['test', sprite]], { container: stage, key: true });
 
     expect(group.getSprite('test')).toBeTruthy();
   });
@@ -82,7 +82,7 @@ describe('Factory.Group', () => {
 
     const stage = { addChild: (_: any) => {} };
 
-    const group = Factory.Group.createGroup(
+    const group = Factory.Group.create(
       [
         ['foo', foo],
         ['bar', bar],
@@ -101,7 +101,7 @@ describe('Factory.Group', () => {
     const stage = { addChild: (_: any) => {} };
 
     try {
-      Factory.Group.createGroup(
+      Factory.Group.create(
         [
           ['foo', foo],
           ['foo', bar],
@@ -118,7 +118,7 @@ describe('Factory.Group', () => {
 
     const stage = { addChild: (_: any) => {} };
 
-    const group = Factory.Group.createGroup([], { container: stage, key: false });
+    const group = Factory.Group.create([], { container: stage, key: false });
 
     try {
       group.add(['foo', sprite]);
@@ -132,7 +132,7 @@ describe('Factory.Group', () => {
 
     const stage = { width: 0, height: 0, addChild: (_: any) => {} };
 
-    const group = Factory.Group.createGroup([sprite], { container: stage, size: { width: 100, height: 100 } });
+    const group = Factory.Group.create([sprite], { container: stage, size: { width: 100, height: 100 } });
 
     expect(group.getContainer().width).toBe(100);
     expect(group.getContainer().height).toBe(100);
@@ -143,7 +143,7 @@ describe('Factory.Group', () => {
 
     const stage = { width: 0, height: 0, addChild: (_: any) => {} };
 
-    const group = Factory.Group.createGroup([['test', sprite]], {
+    const group = Factory.Group.create([['test', sprite]], {
       container: stage,
       key: true,
       size: { width: 100, height: 100 },
@@ -158,7 +158,7 @@ describe('Factory.Group', () => {
 
     const stage = { addChild: (_: any) => {}, position: { set: (...args: any) => {} } };
 
-    const group = Factory.Group.createGroup([['test', sprite]], { container: stage, key: true, position: [20, 20] });
+    const group = Factory.Group.create([['test', sprite]], { container: stage, key: true, position: [20, 20] });
 
     expect(group).toBeTruthy();
   });
@@ -169,7 +169,7 @@ describe('Factory.Group', () => {
     const stage = { width: 0, height: 0, addChild: (_: any) => {} };
 
     try {
-      Factory.Group.createGroup([['test', sprite]], { container: stage, key: true, position: [20, 20, 20] });
+      Factory.Group.create([['test', sprite]], { container: stage, key: true, position: [20, 20, 20] });
     } catch (e) {
       expect(e.message).toBe('pixi-factory: options.position is wrong array, correct example: position = [50, 50]');
     }
@@ -181,7 +181,7 @@ describe('Factory.Group', () => {
     const stage = { width: 0, height: 0, addChild: (_: any) => {} };
 
     try {
-      Factory.Group.createGroup([sprite], { container: stage, position: [20, 20, 20] });
+      Factory.Group.create([sprite], { container: stage, position: [20, 20, 20] });
     } catch (e) {
       expect(e.message).toBe('pixi-factory: options.position is wrong array, correct example: position = [50, 50]');
     }
@@ -193,7 +193,7 @@ describe('Factory.Group', () => {
     const stage = { width: 0, height: 0, addChild: (_: any) => {} };
 
     try {
-      Factory.Group.createGroup([['test', sprite]], { container: stage, key: true, position: [] });
+      Factory.Group.create([['test', sprite]], { container: stage, key: true, position: [] });
     } catch (e) {
       expect(e.message).toBe('pixi-factory: options.position is wrong array, correct example: position = [50, 50]');
     }
@@ -204,7 +204,7 @@ describe('Factory.Group', () => {
 
     const stage = { addChild: (_: any) => {} };
 
-    const group = Factory.Group.createGroup([['test', sprite]], { container: stage, key: true, cleanControl: false });
+    const group = Factory.Group.create([['test', sprite]], { container: stage, key: true, cleanControl: false });
 
     expect(group.getSprite('test')._simpleGroupAdded).toBeTruthy();
   });
@@ -214,7 +214,7 @@ describe('Factory.Group', () => {
 
     const stage = { addChild: (_: any) => {} };
 
-    const group = Factory.Group.createGroup([['test', sprite]], { container: stage, key: true, cleanControl: true });
+    const group = Factory.Group.create([['test', sprite]], { container: stage, key: true, cleanControl: true });
 
     expect(group.getSprite('test')._simpleGroupAdded).toBeUndefined();
   });
@@ -224,7 +224,7 @@ describe('Factory.Group', () => {
 
     const stage = { addChild: (_: any) => {} };
 
-    const group = Factory.Group.createGroup([], { container: stage });
+    const group = Factory.Group.create([], { container: stage });
 
     group.add(sprite);
 
@@ -236,7 +236,7 @@ describe('Factory.Group', () => {
 
     const stage = { addChild: (_: any) => {} };
 
-    const group = Factory.Group.createGroup([], { container: stage, key: true });
+    const group = Factory.Group.create([], { container: stage, key: true });
 
     group.add(['foo', sprite]);
 
@@ -248,7 +248,7 @@ describe('Factory.Group', () => {
 
     const stage = { addChild: (_: any) => {} };
 
-    const group = Factory.Group.createGroup([], { container: stage, key: false });
+    const group = Factory.Group.create([], { container: stage, key: false });
 
     group.add([sprite]);
 
@@ -264,7 +264,7 @@ describe('Factory.Group', () => {
 
     const stage = { addChild: (_: any) => {} };
 
-    const group = Factory.Group.createGroup([], { container: stage, key: true });
+    const group = Factory.Group.create([], { container: stage, key: true });
 
     group.add(['foo', sprite]);
 
@@ -295,7 +295,7 @@ describe('Factory.Group', () => {
 
     const stage = { addChild: (_: any) => {} };
 
-    const group = Factory.Group.createGroup([], { container: stage, key: true });
+    const group = Factory.Group.create([], { container: stage, key: true });
 
     group.add(['foo', foo]);
 
@@ -316,7 +316,7 @@ describe('Factory.Group', () => {
 
     const stage = { addChild: (_: any) => {} };
 
-    const group = Factory.Group.createGroup([], { container: stage, key: false });
+    const group = Factory.Group.create([], { container: stage, key: false });
 
     group.add(foo);
     group.add(bar);
@@ -352,7 +352,7 @@ describe('Factory.Group', () => {
 
     const stage = { addChild: (_: any) => {} };
 
-    const group = Factory.Group.createGroup([], { container: stage, key: true });
+    const group = Factory.Group.create([], { container: stage, key: true });
 
     group.add(['foo', foo]);
     group.add(['bar', bar]);
@@ -388,7 +388,7 @@ describe('Factory.Group', () => {
 
     const stage = { addChild: (_: any) => {} };
 
-    const group = Factory.Group.createGroup([], { container: stage, key: true });
+    const group = Factory.Group.create([], { container: stage, key: true });
 
     group.add(['foo', foo]);
     group.add(['bar', bar]);
@@ -427,7 +427,7 @@ describe('Factory.Group', () => {
 
     const stage = { addChild: (_: any) => {} };
 
-    const group = Factory.Group.createGroup([], { container: stage, key: true });
+    const group = Factory.Group.create([], { container: stage, key: true });
 
     group.add(['foo', foo]);
     group.add(['bar', bar]);
@@ -445,7 +445,7 @@ describe('Factory.Group', () => {
   it('should set base area without options', () => {
     const stage = { width: 100, height: 100 };
 
-    const group = Factory.Group.createGroup([], { container: stage });
+    const group = Factory.Group.create([], { container: stage });
 
     expect(group.getArea().min.height).toBe(100);
     expect(group.getArea().min.width).toBe(100);
@@ -457,7 +457,7 @@ describe('Factory.Group', () => {
   it('should set base area with options', () => {
     const stage = { width: 100, height: 100 };
 
-    const group = Factory.Group.createGroup([], {
+    const group = Factory.Group.create([], {
       container: stage,
       area: { min: { height: 500, width: 500 }, max: { height: 1000, width: 1000 } },
     });
@@ -472,7 +472,7 @@ describe('Factory.Group', () => {
   it('should set base area in a setter method', () => {
     const stage = { width: 100, height: 100 };
 
-    const group = Factory.Group.createGroup([], {
+    const group = Factory.Group.create([], {
       container: stage,
       area: { min: { height: 500, width: 500 }, max: { height: 1000, width: 1000 } },
     });
@@ -489,7 +489,7 @@ describe('Factory.Group', () => {
   it('should set a debugger active', () => {
     const stage = { width: 100, height: 100, addChild: (_: any) => {} };
 
-    const group = Factory.Group.createGroup([], {
+    const group = Factory.Group.create([], {
       container: stage,
       area: { min: { height: 500, width: 500 }, max: { height: 1000, width: 1000 } },
     });
@@ -516,7 +516,7 @@ describe('Factory.Group', () => {
 
     const stage = { addChild: (_: any) => {}, removeChild: (_: any) => {} };
 
-    const group = Factory.Group.createGroup([], {
+    const group = Factory.Group.create([], {
       container: stage,
     });
 
@@ -547,7 +547,7 @@ describe('Factory.Group', () => {
 
     const stage = { addChild: (_: any) => {}, removeChild: (_: any) => {} };
 
-    const group = Factory.Group.createGroup([], {
+    const group = Factory.Group.create([], {
       container: stage,
       key: true,
     });
@@ -575,7 +575,7 @@ describe('Factory.Group', () => {
 
     const stage = { addChild: (_: any) => {} };
 
-    const group = Factory.Group.createGroup([], {
+    const group = Factory.Group.create([], {
       container: stage,
       key: true,
     });
@@ -605,7 +605,7 @@ describe('Factory.Group', () => {
 
     const stage = { addChild: (_: any) => {}, removeChild: (_: any) => {} };
 
-    const group = Factory.Group.createGroup([], {
+    const group = Factory.Group.create([], {
       container: stage,
     });
 
@@ -636,9 +636,9 @@ describe('Factory.Group', () => {
 
     const stage = { addChild: (_: any) => {}, removeChild: (_: any) => {} };
 
-    const group = Factory.Group.createGroup([], {
+    const group = Factory.Group.create([], {
       container: stage,
-      key: true
+      key: true,
     });
 
     group.add(['foo', sprite]);
@@ -670,7 +670,7 @@ describe('Factory.Group', () => {
 
     const stage = { width: 100, height: 100, x: 0, y: 0, addChild: (_: any) => {} };
 
-    const group = Factory.Group.createGroup([], {
+    const group = Factory.Group.create([], {
       container: stage,
       key: true,
       random: true,
@@ -694,7 +694,7 @@ describe('Factory.Group', () => {
 
     const stage = { addChild: (_: any) => {} };
 
-    const group = Factory.Group.createGroup([sprite], {
+    const group = Factory.Group.create([sprite], {
       container: stage,
       key: false,
     });
@@ -726,7 +726,7 @@ describe('Factory.Group', () => {
 
     const stage = { addChild: (_: any) => {} };
 
-    const group = Factory.Group.createGroup([sprite], {
+    const group = Factory.Group.create([sprite], {
       container: stage,
       key: false,
     });
@@ -758,7 +758,7 @@ describe('Factory.Group', () => {
 
     const stage = { addChild: (_: any) => {} };
 
-    const group = Factory.Group.createGroup([sprite], {
+    const group = Factory.Group.create([sprite], {
       container: stage,
       key: false,
     });
@@ -790,7 +790,7 @@ describe('Factory.Group', () => {
 
     const stage = { addChild: (_: any) => {} };
 
-    const group = Factory.Group.createGroup([sprite], {
+    const group = Factory.Group.create([sprite], {
       container: stage,
       key: false,
     });

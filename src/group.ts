@@ -10,7 +10,7 @@ import {
 } from './types';
 
 /**
- * The default group generate for createGroup function.
+ * The default group generate for create function.
  *
  * It is recommended to use the group using as keys to facilitate the handling of removing / adding new sprites in the group.
  *
@@ -20,7 +20,7 @@ import {
  * // ...
  * function setup() {
  *  const sprite: Utils.PIXISprite = Factory.Sprite.createGenericSprite(new PIXI.Sprite(resources.example.texture));
- *  const group: Group = Factory.Group.createGroup([ sprite ], { container: app.stage });
+ *  const group: Group = Factory.Group.create([ sprite ], { container: app.stage });
  *  // ...
  * }
  * ```
@@ -525,12 +525,12 @@ import { hitTestRectangle } from './contain';
  * // ...
  * function setup() {
  *  const sprite = Factory.Sprite.createGenericSprite(new PIXI.Sprite(resources.example.texture));
- *  const group = Factory.Group.createGroup([ sprite ], { container: app.stage });
+ *  const group = Factory.Group.create([ sprite ], { container: app.stage });
  *
  *  // or
  *
  *  const sprite = Factory.Sprite.createGenericSprite(new PIXI.Sprite(resources.example.texture));
- *  const group = Factory.Group.createGroup([['foo', sprite]], { container: app.stage, key: true });
+ *  const group = Factory.Group.create([['foo', sprite]], { container: app.stage, key: true });
  * }
  * ```
  *
@@ -547,19 +547,19 @@ export class PGroup {
    * // ...
    * function setup() {
    *  const sprite = Factory.Sprite.createGenericSprite(new PIXI.Sprite(resources.example.texture));
-   *  const group = Factory.Group.createGroup([ sprite ], { container: app.stage });
+   *  const group = Factory.Group.create([ sprite ], { container: app.stage });
    *
    *  // or
    *
    *  const sprite = Factory.Sprite.createGenericSprite(new PIXI.Sprite(resources.example.texture));
-   *  const group = Factory.Group.createGroup([['foo', sprite]], { container: app.stage, key: true });
+   *  const group = Factory.Group.create([['foo', sprite]], { container: app.stage, key: true });
    * }
    * ```
    * @param sprites A `PIXI.Sprite` or a `Factory.Sprite` array.
    * @param options Options for create a group sprite.
    * @returns A `Factory.Group` instance.
    */
-  public createGroup(sprites: Array<PIXISpriteGroup>, options: PIXISimpleGroupOptions): SimpleGroup {
+  public create(sprites: Array<PIXISpriteGroup>, options: PIXISimpleGroupOptions): SimpleGroup {
     return new SimpleGroup(sprites, options);
   }
 }
