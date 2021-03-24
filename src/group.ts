@@ -277,21 +277,21 @@ export class SimpleGroup {
   }
 
   /**
-   * Remove a existent sprite in a group
+   * Delete stage element and remove in group
    *
    * ```ts
    * // ...
    * group.add(sprite);
    *
    * setTimeout(() => {
-   *   group.remove(0);
+   *   group.delete(0);
    * }, 2000);
    * // ...
    * ```
    *
    * @param key A key for search in group
    */
-  public remove(key: PIXIGroupKey) {
+  public delete(key: PIXIGroupKey) {
     if (this.__GROUP_KEY) {
       const _sprite = this.getSprite(key as string);
 
@@ -308,6 +308,29 @@ export class SimpleGroup {
 
       _sprite.visible = false;
       _sprite?.destroy();
+    }
+  }
+
+  /**
+   * Remove element in a track group events and actions (for delete render, use delete function instead).
+   *
+   * ```ts
+   * // ...
+   * group.add(sprite);
+   *
+   * setTimeout(() => {
+   *   group.remove(0);
+   * }, 2000);
+   * // ...
+   * ```
+   *
+   * @param key A key for search in group
+   */
+  public remove(key: PIXIGroupKey) {
+    if (this.__GROUP_KEY) {
+      this.list = this.list.filter((sprite: PIXISprite) => sprite.__GROUP_KEY !== (key as string));
+    } else {
+      this.list.splice(key as number, 1);
     }
   }
 
