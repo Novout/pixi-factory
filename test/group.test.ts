@@ -589,6 +589,69 @@ describe('Factory.Group', () => {
     }
   });
 
+  it('should delete a member in group with a number key', () => {
+    const sprite: Utils.PIXISprite = Factory.Sprite.create(
+      { foo: 'bar' },
+      {
+        bump: false,
+        velocity: false,
+        d20rpg: false,
+        content: {
+          test: 'test',
+          destroy: () => {},
+        },
+      },
+    );
+
+    const stage = { addChild: (_: any) => {}, removeChild: (_: any) => {} };
+
+    const group = Factory.Group.createGroup([], {
+      container: stage,
+    });
+
+    group.add(sprite);
+
+    group.delete(0);
+
+    try {
+      group.getSprite(0);
+    } catch (e) {
+      expect(e.message).toBe('pixi-factory: sprite not exists in group');
+    }
+  });
+
+  it('should delete a member in group with a string key', () => {
+    const sprite: Utils.PIXISprite = Factory.Sprite.create(
+      { foo: 'bar' },
+      {
+        bump: false,
+        velocity: false,
+        d20rpg: false,
+        content: {
+          test: 'test',
+          destroy: () => {},
+        },
+      },
+    );
+
+    const stage = { addChild: (_: any) => {}, removeChild: (_: any) => {} };
+
+    const group = Factory.Group.createGroup([], {
+      container: stage,
+      key: true
+    });
+
+    group.add(['foo', sprite]);
+
+    group.delete('foo');
+
+    try {
+      group.getSprite('foo');
+    } catch (e) {
+      expect(e.message).toBe('pixi-factory: not exists element or a duplicated element in a array');
+    }
+  });
+
   it('should random sprite position in a group', () => {
     const sprite: Utils.PIXISprite = Factory.Sprite.create(
       { foo: 'bar' },
