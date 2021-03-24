@@ -4,65 +4,53 @@ import typescript from 'rollup-plugin-typescript2';
 import json from '@rollup/plugin-json';
 import babel from 'rollup-plugin-babel';
 import { terser } from 'rollup-plugin-terser';
+import dts from 'rollup-plugin-dts';
 
-const optionsForPackage = [''];
-const optionsForCompile = ['esm'];
+const optionsForCompile = ['esm', 'amd'];
 
 const createPlugins = () => {
-  return [
-    typescript(),
-    json(),
-    resolve(),
-    commonjs({ include: /node_modules/ }),
-    babel({ exclude: 'node_modules/**' }),
-  ];
+  return [typescript(), json(), resolve(), commonjs(), babel({ exclude: 'node_modules/**' })];
 };
 
 const createConfig = () => {
   const list = [];
 
-  optionsForPackage.forEach((option) => {
+  optionsForCompile.forEach((format) => {
     list.push({
-      input: `./src${option}/index.ts`,
+      input: `./src/index.ts`,
       output: {
-        file: `./lib${option}/index.js`,
-        format: 'cjs',
+        file: `./lib/index.${format}.js`,
+        format,
         exports: 'named',
       },
       plugins: createPlugins(),
     });
 
     list.push({
-      input: `./src${option}/index.ts`,
+      input: `./src/index.ts`,
       output: {
-        file: `./lib${option}/bundle.min.js`,
-        format: 'cjs',
+        file: `./lib/bundle.${format}.min.js`,
+        format,
         exports: 'named',
       },
-      plugins: [...createPlugins(), terser()],
+      plugins: [
+        ...createPlugins(),
+        terser({
+          format: {
+            comments: false,
+          },
+        }),
+      ],
     });
+  });
 
-    optionsForCompile.forEach((format) => {
-      list.push({
-        input: `./src${option}/index.ts`,
-        output: {
-          file: `./lib${option}/index.${format}.js`,
-          format,
-          exports: 'named',
-        },
-        plugins: createPlugins(),
-      });
-
-      list.push({
-        input: `./src${option}/index.ts`,
-        output: {
-          file: `./lib${option}/bundle.${format}.min.js`,
-          format,
-          exports: 'named',
-        },
-        plugins: [...createPlugins(), terser()],
-      });
-    });
+  list.push({
+    input: 'src/index.ts',
+    output: {
+      file: 'lib/index.d.ts',
+      format: 'es',
+    },
+    plugins: [dts()],
   });
 
   return list;

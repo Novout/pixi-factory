@@ -4,7 +4,7 @@
   "license": "MIT",
   "version": "0.1.0",
   "description": "A superset for creating and handling Pixi.js resources.",
-  "main": "lib/index.js",
+  "main": "lib/index.amd.js",
   "module": "lib/index.esm.js",
   "types": "lib/index.d.ts",
   "contributors": [
