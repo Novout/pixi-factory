@@ -21,7 +21,7 @@ import GSAP, { Expo } from 'gsap';
  * import Factory from 'pixi-factory';
  * // ...
  * function setup() {
- *   const sprite = Factory.Sprite.createGenericSprite(new PIXI.Sprite(resources.example.texture));
+ *   const sprite = Factory.Sprite.create(new PIXI.Sprite(resources.example.texture));
  *   // ...
  * }
  *
@@ -31,7 +31,7 @@ import GSAP, { Expo } from 'gsap';
  * import { Sprite } from 'pixi-factory';
  * // ...
  * function setup() {
- *   const sprite = new Sprite().createGenericSprite(new PIXI.Sprite(resources.example.texture));
+ *   const sprite = new Sprite().create(new PIXI.Sprite(resources.example.texture));
  *   // ...
  * }
  * ```
@@ -50,41 +50,16 @@ export class PSprite {
   constructor() {}
 
   /**
-   * Inserts new content into the object according to the your options. This method serves only to facilitate an attachment of content to the object.
-   *
-   * This function does NOT create a new PIXI.Sprite, it just takes the source object and returns a new one with the requested contents.
-   *
-   * ```js
-   * const player = Factory.Sprite.createSpecificSprite(new PIXI.Sprite(resources.example.texture), { name: 'guest001' });
-   * console.log(player.name) // guest001
-   * ```
-   *
-   * @public
-   * @param {PIXIDefaultSprite} [sprite] The default pixi.js sprite.
-   * @param {Record<string, any>} [content] A Object with options for create new sprite.
-   * @return A new object sprites
-   */
-  public createSpecificSprite(sprite: PIXIDefaultSprite, content: Record<string, any>): PIXISprite {
-    this._sprite = sprite;
-
-    // Insert contents and overload a existent properties.
-    Object.entries(content).forEach((tuple) => {
-      (this._sprite as PIXISprite)[tuple[0]] = tuple[1];
-    });
-
-    return this._sprite as PIXISprite;
-  }
-
-  /**
    * Inserts new content into the object according to the preset options.
    *
    * This function does NOT create a new PIXI.Sprite, it just takes the source object and returns a new one with the requested contents.
    *
    * ```js
-   * Factory.Sprite.createGenericSprite(new PIXI.Sprite(resources.example.texture), {
+   * Factory.Sprite.create(new PIXI.Sprite(resources.example.texture), {
    *   bump: true, // hability a collision properties
    *   velocity: true, // hability a velocity base content
    *   d20rpg: true // hability a standard d20 rpg
+   *   content: { ... } // append itens in a base sprite
    * });
    * ```
    *
@@ -93,7 +68,7 @@ export class PSprite {
    * @param {PIXISpriteOptions} [options] The options for create new sprite.
    * @return A new object sprites
    */
-  public createGenericSprite(
+  public create(
     sprite: PIXIDefaultSprite,
     { bump, velocity, d20rpg, content }: PIXISpriteOptions = {
       bump: true,

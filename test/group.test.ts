@@ -30,7 +30,7 @@ describe('Factory.Group', () => {
   });
 
   it('should create a group with a unique sprite', () => {
-    const sprite: Utils.PIXISprite = Factory.Sprite.createGenericSprite({ foo: 'bar' });
+    const sprite: Utils.PIXISprite = Factory.Sprite.create({ foo: 'bar' });
 
     const stage = { addChild: (_: any) => {} };
 
@@ -40,7 +40,7 @@ describe('Factory.Group', () => {
   });
 
   it('should not create a group with a two sprites', () => {
-    const sprite: Utils.PIXISprite = Factory.Sprite.createGenericSprite({ foo: 'bar' });
+    const sprite: Utils.PIXISprite = Factory.Sprite.create({ foo: 'bar' });
 
     const stage = { addChild: (_: any) => {} };
 
@@ -54,9 +54,9 @@ describe('Factory.Group', () => {
   });
 
   it('should create a group with a multiple sprite', () => {
-    const foo: Utils.PIXISprite = Factory.Sprite.createGenericSprite({ foo: 'foo' });
-    const bar: Utils.PIXISprite = Factory.Sprite.createGenericSprite({ bar: 'bar' });
-    const lett: Utils.PIXISprite = Factory.Sprite.createGenericSprite({ lett: 'lett' });
+    const foo: Utils.PIXISprite = Factory.Sprite.create({ foo: 'foo' });
+    const bar: Utils.PIXISprite = Factory.Sprite.create({ bar: 'bar' });
+    const lett: Utils.PIXISprite = Factory.Sprite.create({ lett: 'lett' });
 
     const stage = { addChild: (_: any) => {} };
 
@@ -66,7 +66,7 @@ describe('Factory.Group', () => {
   });
 
   it('should create a group with a key unique sprite', () => {
-    const sprite: Utils.PIXISprite = Factory.Sprite.createGenericSprite({ foo: 'bar' });
+    const sprite: Utils.PIXISprite = Factory.Sprite.create({ foo: 'bar' });
 
     const stage = { addChild: (_: any) => {} };
 
@@ -76,9 +76,9 @@ describe('Factory.Group', () => {
   });
 
   it('should create a group with a key multiple sprite', () => {
-    const foo: Utils.PIXISprite = Factory.Sprite.createGenericSprite({ foo: 'foo' });
-    const bar: Utils.PIXISprite = Factory.Sprite.createGenericSprite({ bar: 'bar' });
-    const lett: Utils.PIXISprite = Factory.Sprite.createGenericSprite({ lett: 'lett' });
+    const foo: Utils.PIXISprite = Factory.Sprite.create({ foo: 'foo' });
+    const bar: Utils.PIXISprite = Factory.Sprite.create({ bar: 'bar' });
+    const lett: Utils.PIXISprite = Factory.Sprite.create({ lett: 'lett' });
 
     const stage = { addChild: (_: any) => {} };
 
@@ -95,8 +95,8 @@ describe('Factory.Group', () => {
   });
 
   it('should not create a group with a duplicated key', () => {
-    const foo: Utils.PIXISprite = Factory.Sprite.createGenericSprite({ foo: 'foo' });
-    const bar: Utils.PIXISprite = Factory.Sprite.createGenericSprite({ bar: 'bar' });
+    const foo: Utils.PIXISprite = Factory.Sprite.create({ foo: 'foo' });
+    const bar: Utils.PIXISprite = Factory.Sprite.create({ bar: 'bar' });
 
     const stage = { addChild: (_: any) => {} };
 
@@ -114,7 +114,7 @@ describe('Factory.Group', () => {
   });
 
   it('should not create a new sprite with key false', () => {
-    const sprite: Utils.PIXISprite = Factory.Sprite.createGenericSprite({ foo: 'bar' });
+    const sprite: Utils.PIXISprite = Factory.Sprite.create({ foo: 'bar' });
 
     const stage = { addChild: (_: any) => {} };
 
@@ -128,7 +128,7 @@ describe('Factory.Group', () => {
   });
 
   it('should define a size container in default group', () => {
-    const sprite: Utils.PIXISprite = Factory.Sprite.createGenericSprite({ foo: 'bar' });
+    const sprite: Utils.PIXISprite = Factory.Sprite.create({ foo: 'bar' });
 
     const stage = { width: 0, height: 0, addChild: (_: any) => {} };
 
@@ -139,7 +139,7 @@ describe('Factory.Group', () => {
   });
 
   it('should define a size container', () => {
-    const sprite: Utils.PIXISprite = Factory.Sprite.createGenericSprite({ foo: 'bar' });
+    const sprite: Utils.PIXISprite = Factory.Sprite.create({ foo: 'bar' });
 
     const stage = { width: 0, height: 0, addChild: (_: any) => {} };
 
@@ -154,7 +154,7 @@ describe('Factory.Group', () => {
   });
 
   it('should define a positional container', () => {
-    const sprite: Utils.PIXISprite = Factory.Sprite.createGenericSprite({ foo: 'bar' });
+    const sprite: Utils.PIXISprite = Factory.Sprite.create({ foo: 'bar' });
 
     const stage = { addChild: (_: any) => {}, position: { set: (...args: any) => {} } };
 
@@ -164,7 +164,7 @@ describe('Factory.Group', () => {
   });
 
   it('should not define a positional container with a error parameters', () => {
-    const sprite: Utils.PIXISprite = Factory.Sprite.createGenericSprite({ foo: 'bar' });
+    const sprite: Utils.PIXISprite = Factory.Sprite.create({ foo: 'bar' });
 
     const stage = { width: 0, height: 0, addChild: (_: any) => {} };
 
@@ -176,7 +176,7 @@ describe('Factory.Group', () => {
   });
 
   it('should not define a positional container with a error parameters dont key', () => {
-    const sprite: Utils.PIXISprite = Factory.Sprite.createGenericSprite({ foo: 'bar' });
+    const sprite: Utils.PIXISprite = Factory.Sprite.create({ foo: 'bar' });
 
     const stage = { width: 0, height: 0, addChild: (_: any) => {} };
 
@@ -188,7 +188,7 @@ describe('Factory.Group', () => {
   });
 
   it('should not define a positional container with a empty parameters', () => {
-    const sprite: Utils.PIXISprite = Factory.Sprite.createGenericSprite({ foo: 'bar' });
+    const sprite: Utils.PIXISprite = Factory.Sprite.create({ foo: 'bar' });
 
     const stage = { width: 0, height: 0, addChild: (_: any) => {} };
 
@@ -200,7 +200,7 @@ describe('Factory.Group', () => {
   });
 
   it('should create a group with a control hability', () => {
-    const sprite: Utils.PIXISprite = Factory.Sprite.createGenericSprite({ foo: 'bar' });
+    const sprite: Utils.PIXISprite = Factory.Sprite.create({ foo: 'bar' });
 
     const stage = { addChild: (_: any) => {} };
 
@@ -210,7 +210,7 @@ describe('Factory.Group', () => {
   });
 
   it('should not create a group with a control hability', () => {
-    const sprite: Utils.PIXISprite = Factory.Sprite.createGenericSprite({ foo: 'bar' });
+    const sprite: Utils.PIXISprite = Factory.Sprite.create({ foo: 'bar' });
 
     const stage = { addChild: (_: any) => {} };
 
@@ -220,7 +220,7 @@ describe('Factory.Group', () => {
   });
 
   it('should create a new sprite after initialize', () => {
-    const sprite: Utils.PIXISprite = Factory.Sprite.createGenericSprite({ foo: 'bar' });
+    const sprite: Utils.PIXISprite = Factory.Sprite.create({ foo: 'bar' });
 
     const stage = { addChild: (_: any) => {} };
 
@@ -232,7 +232,7 @@ describe('Factory.Group', () => {
   });
 
   it('should create a new sprite with key after initialize', () => {
-    const sprite: Utils.PIXISprite = Factory.Sprite.createGenericSprite({ foo: 'bar' });
+    const sprite: Utils.PIXISprite = Factory.Sprite.create({ foo: 'bar' });
 
     const stage = { addChild: (_: any) => {} };
 
@@ -244,7 +244,7 @@ describe('Factory.Group', () => {
   });
 
   it('should not search a sprite with a string parameter', () => {
-    const sprite: Utils.PIXISprite = Factory.Sprite.createGenericSprite({ foo: 'bar' });
+    const sprite: Utils.PIXISprite = Factory.Sprite.create({ foo: 'bar' });
 
     const stage = { addChild: (_: any) => {} };
 
@@ -260,7 +260,7 @@ describe('Factory.Group', () => {
   });
 
   it('should not search a sprite with a number parameter', () => {
-    const sprite: Utils.PIXISprite = Factory.Sprite.createGenericSprite({ foo: 'bar' });
+    const sprite: Utils.PIXISprite = Factory.Sprite.create({ foo: 'bar' });
 
     const stage = { addChild: (_: any) => {} };
 
@@ -276,7 +276,7 @@ describe('Factory.Group', () => {
   });
 
   it('should execute callback in a group hit effect', () => {
-    const foo: Utils.PIXISprite = Factory.Sprite.createGenericSprite(
+    const foo: Utils.PIXISprite = Factory.Sprite.create(
       { foo: 'foo' },
       {
         bump: true,
@@ -284,7 +284,7 @@ describe('Factory.Group', () => {
         d20rpg: true,
       },
     );
-    const bar: Utils.PIXISprite = Factory.Sprite.createGenericSprite(
+    const bar: Utils.PIXISprite = Factory.Sprite.create(
       { bar: 'bar' },
       {
         bump: true,
@@ -311,8 +311,8 @@ describe('Factory.Group', () => {
   });
 
   it('should not execute a callback with a specific sprite', () => {
-    const foo: Utils.PIXISprite = Factory.Sprite.createGenericSprite({ foo: 'foo' });
-    const bar: Utils.PIXISprite = Factory.Sprite.createGenericSprite({ bar: 'bar' });
+    const foo: Utils.PIXISprite = Factory.Sprite.create({ foo: 'foo' });
+    const bar: Utils.PIXISprite = Factory.Sprite.create({ bar: 'bar' });
 
     const stage = { addChild: (_: any) => {} };
 
@@ -333,7 +333,7 @@ describe('Factory.Group', () => {
   });
 
   it('should execute callback in a sprite group member hit effect', () => {
-    const foo: Utils.PIXISprite = Factory.Sprite.createGenericSprite(
+    const foo: Utils.PIXISprite = Factory.Sprite.create(
       { foo: 'foo' },
       {
         bump: true,
@@ -341,7 +341,7 @@ describe('Factory.Group', () => {
         d20rpg: true,
       },
     );
-    const bar: Utils.PIXISprite = Factory.Sprite.createGenericSprite(
+    const bar: Utils.PIXISprite = Factory.Sprite.create(
       { bar: 'bar' },
       {
         bump: true,
@@ -369,7 +369,7 @@ describe('Factory.Group', () => {
   });
 
   it('should execute callback in a sprite group member hit effect in a priority order', () => {
-    const foo: Utils.PIXISprite = Factory.Sprite.createGenericSprite(
+    const foo: Utils.PIXISprite = Factory.Sprite.create(
       { foo: 'foo' },
       {
         bump: true,
@@ -377,7 +377,7 @@ describe('Factory.Group', () => {
         d20rpg: true,
       },
     );
-    const bar: Utils.PIXISprite = Factory.Sprite.createGenericSprite(
+    const bar: Utils.PIXISprite = Factory.Sprite.create(
       { bar: 'bar' },
       {
         bump: true,
@@ -408,7 +408,7 @@ describe('Factory.Group', () => {
   });
 
   it('should execute callback parameter sprite and your effect', () => {
-    const foo: Utils.PIXISprite = Factory.Sprite.createGenericSprite(
+    const foo: Utils.PIXISprite = Factory.Sprite.create(
       { foo: 'foo', x: 0, y: 0, width: 50, height: 50 },
       {
         bump: true,
@@ -416,7 +416,7 @@ describe('Factory.Group', () => {
         d20rpg: true,
       },
     );
-    const bar: Utils.PIXISprite = Factory.Sprite.createGenericSprite(
+    const bar: Utils.PIXISprite = Factory.Sprite.create(
       { bar: 'bar', x: 0, y: 0, width: 50, height: 50 },
       {
         bump: true,
@@ -501,7 +501,7 @@ describe('Factory.Group', () => {
   });
 
   it('should remove a member in group with a number key', () => {
-    const sprite: Utils.PIXISprite = Factory.Sprite.createGenericSprite(
+    const sprite: Utils.PIXISprite = Factory.Sprite.create(
       { foo: 'bar' },
       {
         bump: false,
@@ -532,7 +532,7 @@ describe('Factory.Group', () => {
   });
 
   it('should remove a member in group with a string key', () => {
-    const sprite: Utils.PIXISprite = Factory.Sprite.createGenericSprite(
+    const sprite: Utils.PIXISprite = Factory.Sprite.create(
       { foo: 'bar' },
       {
         bump: false,
@@ -564,7 +564,7 @@ describe('Factory.Group', () => {
   });
 
   it('should not exists a empty member in group in remove method', () => {
-    const sprite: Utils.PIXISprite = Factory.Sprite.createGenericSprite(
+    const sprite: Utils.PIXISprite = Factory.Sprite.create(
       { foo: 'bar' },
       {
         bump: true,
@@ -590,7 +590,7 @@ describe('Factory.Group', () => {
   });
 
   it('should random sprite position in a group', () => {
-    const sprite: Utils.PIXISprite = Factory.Sprite.createGenericSprite(
+    const sprite: Utils.PIXISprite = Factory.Sprite.create(
       { foo: 'bar' },
       {
         bump: true,
@@ -620,7 +620,7 @@ describe('Factory.Group', () => {
   });
 
   it('should sprite in a min group area', () => {
-    const sprite: Utils.PIXISprite = Factory.Sprite.createGenericSprite(
+    const sprite: Utils.PIXISprite = Factory.Sprite.create(
       { foo: 'bar' },
       {
         bump: true,
@@ -648,7 +648,7 @@ describe('Factory.Group', () => {
   });
 
   it('should sprite in a max group area', () => {
-    const sprite: Utils.PIXISprite = Factory.Sprite.createGenericSprite(
+    const sprite: Utils.PIXISprite = Factory.Sprite.create(
       { foo: 'bar' },
       {
         bump: true,
@@ -680,7 +680,7 @@ describe('Factory.Group', () => {
   });
 
   it('should not bump sprite in a min group area', () => {
-    const sprite: Utils.PIXISprite = Factory.Sprite.createGenericSprite(
+    const sprite: Utils.PIXISprite = Factory.Sprite.create(
       { foo: 'bar' },
       {
         bump: false,
@@ -712,7 +712,7 @@ describe('Factory.Group', () => {
   });
 
   it('should not bump sprite in a max group area', () => {
-    const sprite: Utils.PIXISprite = Factory.Sprite.createGenericSprite(
+    const sprite: Utils.PIXISprite = Factory.Sprite.create(
       { foo: 'bar' },
       {
         bump: false,

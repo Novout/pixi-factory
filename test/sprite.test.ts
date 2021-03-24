@@ -12,7 +12,7 @@ describe('Factory.Sprite', () => {
   });
 
   it('should exists factory sprite', () => {
-    const sprite: Utils.PIXISprite = Factory.Sprite.createGenericSprite(
+    const sprite: Utils.PIXISprite = Factory.Sprite.create(
       { foo: 'bar' },
       {
         bump: true,
@@ -31,7 +31,7 @@ describe('Factory.Sprite', () => {
     app.loader.add('example', '_.jpg').load((loader, resources) => {
       const example = new PIXI.Sprite(resources['example']!.texture);
 
-      const sprite: Utils.PIXISprite = Factory.Sprite.createGenericSprite(example, {
+      const sprite: Utils.PIXISprite = Factory.Sprite.create(example, {
         bump: true,
         velocity: true,
         d20rpg: true,
@@ -42,7 +42,7 @@ describe('Factory.Sprite', () => {
   });
 
   it('should exists factory sprite with Sprite instance', () => {
-    const sprite: Utils.PIXISprite = new Sprite().createGenericSprite(
+    const sprite: Utils.PIXISprite = new Sprite().create(
       { foo: 'bar' },
       {
         bump: true,
@@ -61,7 +61,7 @@ describe('Factory.Sprite', () => {
     app.loader.add('example', '_.jpg').load((loader, resources) => {
       const example = new PIXI.Sprite(resources['example']!.texture);
 
-      const sprite: Utils.PIXISprite = new Sprite().createGenericSprite(example, {
+      const sprite: Utils.PIXISprite = new Sprite().create(example, {
         bump: true,
         velocity: true,
         d20rpg: true,
@@ -82,7 +82,7 @@ describe('Factory.Sprite', () => {
 
       app.stage.addChild(example);
 
-      const sprite: Utils.PIXISprite = Factory.Sprite.createGenericSprite(example, {
+      const sprite: Utils.PIXISprite = Factory.Sprite.create(example, {
         bump: true,
         velocity: false,
         d20rpg: false,
@@ -105,7 +105,7 @@ describe('Factory.Sprite', () => {
 
       app.stage.addChild(example);
 
-      const sprite: Utils.PIXISprite = Factory.Sprite.createGenericSprite(example, {
+      const sprite: Utils.PIXISprite = Factory.Sprite.create(example, {
         bump: false,
         velocity: true,
         d20rpg: false,
@@ -128,7 +128,7 @@ describe('Factory.Sprite', () => {
 
       app.stage.addChild(example);
 
-      const sprite = Factory.Sprite.createGenericSprite(example, {
+      const sprite = Factory.Sprite.create(example, {
         bump: false,
         velocity: false,
         d20rpg: true,
@@ -141,7 +141,7 @@ describe('Factory.Sprite', () => {
   });
 
   it('should player level up', () => {
-    const sprite: Utils.PIXISprite = Factory.Sprite.createGenericSprite(
+    const sprite: Utils.PIXISprite = Factory.Sprite.create(
       { foo: 'bar' },
       {
         bump: false,
@@ -155,7 +155,7 @@ describe('Factory.Sprite', () => {
   });
 
   it('should player max level up', () => {
-    const sprite: Utils.PIXISprite = Factory.Sprite.createGenericSprite(
+    const sprite: Utils.PIXISprite = Factory.Sprite.create(
       { foo: 'bar' },
       {
         bump: false,
@@ -179,7 +179,7 @@ describe('Factory.Sprite', () => {
   });
 
   it('should player roll damage', () => {
-    const sprite: Utils.PIXISprite = Factory.Sprite.createGenericSprite(
+    const sprite: Utils.PIXISprite = Factory.Sprite.create(
       { foo: 'bar' },
       {
         bump: false,
@@ -194,7 +194,7 @@ describe('Factory.Sprite', () => {
   });
 
   it('should player roll attack with default settings', () => {
-    const sprite: Utils.PIXISprite = Factory.Sprite.createGenericSprite(
+    const sprite: Utils.PIXISprite = Factory.Sprite.create(
       { foo: 'bar' },
       {
         bump: false,
@@ -209,7 +209,7 @@ describe('Factory.Sprite', () => {
   });
 
   it('should player roll attack with new roll attack settings', () => {
-    const sprite: Utils.PIXISprite = Factory.Sprite.createGenericSprite(
+    const sprite: Utils.PIXISprite = Factory.Sprite.create(
       { foo: 'bar' },
       {
         bump: false,
@@ -225,7 +225,7 @@ describe('Factory.Sprite', () => {
   });
 
   it('should player roll attack greater than the targets AC value', () => {
-    const sprite: Utils.PIXISprite = Factory.Sprite.createGenericSprite(
+    const sprite: Utils.PIXISprite = Factory.Sprite.create(
       { foo: 'bar' },
       {
         bump: false,
@@ -238,7 +238,7 @@ describe('Factory.Sprite', () => {
   });
 
   it('should player roll attack less than the targets AC value', () => {
-    const sprite: Utils.PIXISprite = Factory.Sprite.createGenericSprite(
+    const sprite: Utils.PIXISprite = Factory.Sprite.create(
       { foo: 'bar' },
       {
         bump: false,
@@ -251,7 +251,7 @@ describe('Factory.Sprite', () => {
   });
 
   it('should set new velocity in generic sprite', () => {
-    const sprite: Utils.PIXISprite = Factory.Sprite.createGenericSprite(
+    const sprite: Utils.PIXISprite = Factory.Sprite.create(
       { foo: 'bar' },
       {
         bump: false,
@@ -266,7 +266,7 @@ describe('Factory.Sprite', () => {
   });
 
   it('should set wrong new velocity in generic sprite', () => {
-    const sprite: Utils.PIXISprite = Factory.Sprite.createGenericSprite(
+    const sprite: Utils.PIXISprite = Factory.Sprite.create(
       { foo: 'bar' },
       {
         bump: false,
@@ -281,7 +281,7 @@ describe('Factory.Sprite', () => {
   });
 
   it('should set new movement in generic sprite', () => {
-    const sprite: Utils.PIXISprite = Factory.Sprite.createGenericSprite(
+    const sprite: Utils.PIXISprite = Factory.Sprite.create(
       { foo: 'bar' },
       {
         bump: false,
@@ -295,7 +295,7 @@ describe('Factory.Sprite', () => {
   });
 
   it('should set wrong new movement in generic sprite', () => {
-    const sprite: Utils.PIXISprite = Factory.Sprite.createGenericSprite(
+    const sprite: Utils.PIXISprite = Factory.Sprite.create(
       { foo: 'bar' },
       {
         bump: false,
@@ -309,7 +309,7 @@ describe('Factory.Sprite', () => {
   });
 
   it('should velocity effect knockback with up options', () => {
-    const sprite: Utils.PIXISprite = Factory.Sprite.createGenericSprite(
+    const sprite: Utils.PIXISprite = Factory.Sprite.create(
       { foo: 'bar' },
       {
         bump: false,
@@ -329,7 +329,7 @@ describe('Factory.Sprite', () => {
   });
 
   it('should velocity effect knockback with down options', () => {
-    const sprite: Utils.PIXISprite = Factory.Sprite.createGenericSprite(
+    const sprite: Utils.PIXISprite = Factory.Sprite.create(
       { foo: 'bar' },
       {
         bump: false,
@@ -349,7 +349,7 @@ describe('Factory.Sprite', () => {
   });
 
   it('should velocity effect knockback with default options', () => {
-    const sprite: Utils.PIXISprite = Factory.Sprite.createGenericSprite(
+    const sprite: Utils.PIXISprite = Factory.Sprite.create(
       { foo: 'bar' },
       {
         bump: false,
@@ -369,7 +369,7 @@ describe('Factory.Sprite', () => {
   });
 
   it('should velocity effect knockback with new options', () => {
-    const sprite: Utils.PIXISprite = Factory.Sprite.createGenericSprite(
+    const sprite: Utils.PIXISprite = Factory.Sprite.create(
       { foo: 'bar' },
       {
         bump: false,
@@ -389,7 +389,7 @@ describe('Factory.Sprite', () => {
   });
 
   it('should velocity with error direction option to throw error', () => {
-    const sprite: Utils.PIXISprite = Factory.Sprite.createGenericSprite(
+    const sprite: Utils.PIXISprite = Factory.Sprite.create(
       { foo: 'bar' },
       {
         bump: false,
@@ -410,7 +410,7 @@ describe('Factory.Sprite', () => {
   });
 
   it('should set content in generic sprite', () => {
-    const sprite: Utils.PIXISprite = Factory.Sprite.createGenericSprite(
+    const sprite: Utils.PIXISprite = Factory.Sprite.create(
       { foo: 'bar' },
       {
         bump: false,
@@ -426,7 +426,7 @@ describe('Factory.Sprite', () => {
   });
 
   it('should override content in generic sprite', () => {
-    const sprite: Utils.PIXISprite = Factory.Sprite.createGenericSprite(
+    const sprite: Utils.PIXISprite = Factory.Sprite.create(
       { foo: 'bar' },
       {
         bump: false,
@@ -439,29 +439,5 @@ describe('Factory.Sprite', () => {
     );
 
     expect(sprite.foo).toBe('bar');
-  });
-
-  it('should exists factory specific sprite with Sprite instance', () => {
-    const sprite: Utils.PIXISprite = new Sprite().createSpecificSprite({ name: 'guest001' }, { foo: 'bar' });
-
-    expect(sprite).toHaveProperty('foo', 'bar');
-  });
-
-  it('should overload sprite definitions in specific create sprite in a Sprite instance', () => {
-    const sprite: Utils.PIXISprite = new Sprite().createSpecificSprite({ name: 'guest001' }, { name: 'guest002' });
-
-    expect(sprite).toHaveProperty('name', 'guest002');
-  });
-
-  it('should exists factory specific sprite in a Factory', () => {
-    const sprite: Utils.PIXISprite = Factory.Sprite.createSpecificSprite({ name: 'guest001' }, { foo: 'bar' });
-
-    expect(sprite).toHaveProperty('foo', 'bar');
-  });
-
-  it('should overload sprite definitions in specific create sprite in a Factory', () => {
-    const sprite: Utils.PIXISprite = Factory.Sprite.createSpecificSprite({ name: 'guest001' }, { name: 'guest002' });
-
-    expect(sprite).toHaveProperty('name', 'guest002');
   });
 });
