@@ -41,11 +41,11 @@ export interface PIXIDefaultSprite {
  * import { Sprite, Utils } from 'pixi-factory';
  * // ...
  * function setup() {
- *   const sprite: Utils.PIXISprite = new PSprite().createGenericSprite(new PIXI.Sprite(resources.example.texture));
+ *   const sprite: Utils.PIXISprite = new Sprite().create(new PIXI.Sprite(resources.example.texture));
  *   // ...
  * }
  * ```
- * @type {Interface}
+ * @type {Sprite}
  */
 export interface PIXISprite extends PIXIDefaultSprite {
   /** A global x position */

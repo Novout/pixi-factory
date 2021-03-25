@@ -51,7 +51,7 @@ The creation functions expect only a generic object with a key in `string`, so t
 ```ts
 import Factory from 'pixi-factory';
 
-const sprite = Factory.Sprite.create({ name: 'guest001' }, { foo: 'bar' });
+const sprite = Factory.Sprite.create({ name: 'guest001' }, { content: { foo: 'bar' } });
 ```
 
 The internal methods are also generic, waiting to receive the sprite that is being instantiated, modifying the internal methods. It is not a directly safe approach because it is changeable, but it makes it easy to handle objects without the need for an ECS.

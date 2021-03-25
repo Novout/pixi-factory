@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "outDir": "../lib",
+    "outDir": "lib",
     "target": "es5",
     "module": "esnext",
     "lib": ["es5", "es6", "dom"],
@@ -20,5 +20,5 @@
     "moduleResolution": "node"
   },
   "include": ["src"],
-  "exclude": ["node_modules", "../lib", "**/*.test.ts"]
+  "exclude": ["node_modules", "lib", "**/*.test.ts"]
 }
