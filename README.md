@@ -8,7 +8,7 @@ A superset for creating and handling Pixi.js resources
 
 ## Install
 
-````shell
+```shell
 npm install pixi.js pixi-factory
 
 or
