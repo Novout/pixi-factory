@@ -145,7 +145,7 @@ function setup() {
     { container: app.stage, key: true },
   );
 
-  console.log(wolfs.getSprite('wolf1'));
+  console.log(wolfs.get('wolf1'));
 }
 ```
 
@@ -171,9 +171,9 @@ app.loader.add('example', 'example.jpg').load((loader, resources) => {
   Controller.Mouse.prevent(BUTTON.RIGHT);
 
   app.ticker.add(() => {
-    if (Controller.Keyboard.isKeyDown(...PLAYER.LEFT)) group.getSprite('example').x -= 1;
+    if (Controller.Keyboard.isKeyDown(...PLAYER.LEFT)) group.get('example').x -= 1;
     if (Controller.Keyboard.isKeyDown(...PLAYER.RIGHT)) _example.x += 1;
-    if (Controller.Keyboard.isKeyDown(...PLAYER.UP)) group.getSprite('example').y -= 1;
+    if (Controller.Keyboard.isKeyDown(...PLAYER.UP)) group.get('example').y -= 1;
     if (Controller.Keyboard.isKeyDown(...PLAYER.DOWN)) _example.y += 1;
 
     Controller.update();

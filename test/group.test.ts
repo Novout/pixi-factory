@@ -23,7 +23,7 @@ describe('Factory.Group', () => {
     const stage = { addChild: (_: any) => {} };
 
     try {
-      Factory.Group.create([], { container: stage }).getSprite(0);
+      Factory.Group.create([], { container: stage }).get(0);
     } catch (e) {
       expect(e.message).toBe('pixi-factory: sprite not exists in group');
     }
@@ -36,7 +36,7 @@ describe('Factory.Group', () => {
 
     const group = Factory.Group.create([sprite], { container: stage });
 
-    expect(group.getSprite(0)).toBeTruthy();
+    expect(group.get(0)).toBeTruthy();
   });
 
   it('should not create a group with a two sprites', () => {
@@ -47,7 +47,7 @@ describe('Factory.Group', () => {
     try {
       const group = Factory.Group.create([sprite], { container: stage });
 
-      group.getSprite(1);
+      group.get(1);
     } catch (e) {
       expect(e.message).toBe('pixi-factory: sprite not exists in group');
     }
@@ -62,7 +62,7 @@ describe('Factory.Group', () => {
 
     const group = Factory.Group.create([foo, bar, lett], { container: stage });
 
-    expect(group.getSprites().length).toBe(3);
+    expect(group.gets().length).toBe(3);
   });
 
   it('should create a group with a key unique sprite', () => {
@@ -72,7 +72,7 @@ describe('Factory.Group', () => {
 
     const group = Factory.Group.create([['test', sprite]], { container: stage, key: true });
 
-    expect(group.getSprite('test')).toBeTruthy();
+    expect(group.get('test')).toBeTruthy();
   });
 
   it('should create a group with a key multiple sprite', () => {
@@ -91,7 +91,7 @@ describe('Factory.Group', () => {
       { container: stage, key: true },
     );
 
-    expect(group.getSprites().length).toBe(3);
+    expect(group.gets().length).toBe(3);
   });
 
   it('should not create a group with a duplicated key', () => {
@@ -107,7 +107,7 @@ describe('Factory.Group', () => {
           ['foo', bar],
         ],
         { container: stage, key: true },
-      ).getSprite('foo');
+      ).get('foo');
     } catch (e) {
       expect(e.message).toBe('pixi-factory: not exists element or a duplicated element in a array');
     }
@@ -206,7 +206,7 @@ describe('Factory.Group', () => {
 
     const group = Factory.Group.create([['test', sprite]], { container: stage, key: true, cleanControl: false });
 
-    expect(group.getSprite('test')._simpleGroupAdded).toBeTruthy();
+    expect(group.get('test')._simpleGroupAdded).toBeTruthy();
   });
 
   it('should not create a group with a control hability', () => {
@@ -216,7 +216,7 @@ describe('Factory.Group', () => {
 
     const group = Factory.Group.create([['test', sprite]], { container: stage, key: true, cleanControl: true });
 
-    expect(group.getSprite('test')._simpleGroupAdded).toBeUndefined();
+    expect(group.get('test')._simpleGroupAdded).toBeUndefined();
   });
 
   it('should create a new sprite after initialize', () => {
@@ -228,7 +228,7 @@ describe('Factory.Group', () => {
 
     group.add(sprite);
 
-    expect(group.getSprite(0)).toBeTruthy();
+    expect(group.get(0)).toBeTruthy();
   });
 
   it('should create a new sprite with key after initialize', () => {
@@ -240,7 +240,7 @@ describe('Factory.Group', () => {
 
     group.add(['foo', sprite]);
 
-    expect(group.getSprite('foo')).toBeTruthy();
+    expect(group.get('foo')).toBeTruthy();
   });
 
   it('should not search a sprite with a string parameter', () => {
@@ -253,7 +253,7 @@ describe('Factory.Group', () => {
     group.add([sprite]);
 
     try {
-      group.getSprite('foo');
+      group.get('foo');
     } catch (e) {
       expect(e.message).toBe('pixi-sprite: key as not enable, in this group, go through the options key: true');
     }
@@ -269,7 +269,7 @@ describe('Factory.Group', () => {
     group.add(['foo', sprite]);
 
     try {
-      group.getSprite(0);
+      group.get(0);
     } catch (e) {
       expect(e.message).toBe('pixi-sprite: not to search for the number while is key enabled.');
     }
@@ -439,7 +439,7 @@ describe('Factory.Group', () => {
     ]);
 
     expect(bar.x).toBe(5000);
-    expect(group.getSprite('bar').x).toBe(5000);
+    expect(group.get('bar').x).toBe(5000);
   });
 
   it('should set base area without options', () => {
@@ -525,7 +525,7 @@ describe('Factory.Group', () => {
     group.remove(0);
 
     try {
-      group.getSprite(0);
+      group.get(0);
     } catch (e) {
       expect(e.message).toBe('pixi-factory: sprite not exists in group');
     }
@@ -557,7 +557,7 @@ describe('Factory.Group', () => {
     group.remove('foo');
 
     try {
-      group.getSprite('foo');
+      group.get('foo');
     } catch (e) {
       expect(e.message).toBe('pixi-factory: not exists element or a duplicated element in a array');
     }
@@ -614,7 +614,7 @@ describe('Factory.Group', () => {
     group.delete(0);
 
     try {
-      group.getSprite(0);
+      group.get(0);
     } catch (e) {
       expect(e.message).toBe('pixi-factory: sprite not exists in group');
     }
@@ -646,7 +646,7 @@ describe('Factory.Group', () => {
     group.delete('foo');
 
     try {
-      group.getSprite('foo');
+      group.get('foo');
     } catch (e) {
       expect(e.message).toBe('pixi-factory: not exists element or a duplicated element in a array');
     }
@@ -678,8 +678,8 @@ describe('Factory.Group', () => {
 
     group.add(['foo', sprite]);
 
-    expect(group.getSprite('foo').x).toBe(0);
-    expect(group.getSprite('foo').y).toBe(0);
+    expect(group.get('foo').x).toBe(0);
+    expect(group.get('foo').y).toBe(0);
   });
 
   it('should sprite in a min group area', () => {

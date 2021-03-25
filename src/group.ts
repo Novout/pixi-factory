@@ -19,7 +19,7 @@ import {
  * import Factory, { Utils, Group } from 'pixi-factory';
  * // ...
  * function setup() {
- *  const sprite: Utils.PIXISprite = Factory.Sprite.createGenericSprite(new PIXI.Sprite(resources.example.texture));
+ *  const sprite: Utils.PIXISprite = Factory.Sprite.create(new PIXI.Sprite(resources.example.texture));
  *  const group: Group = Factory.Group.create([ sprite ], { container: app.stage });
  *  // ...
  * }
@@ -183,7 +183,7 @@ export class SimpleGroup {
    *
    * @returns A `Factory.Sprite` array
    */
-  public getSprites(): Array<PIXISprite> {
+  public gets(): Array<PIXISprite> {
     return this.list;
   }
 
@@ -233,7 +233,7 @@ export class SimpleGroup {
    * @param key A key for search `Factory.Sprite`
    * @returns A `Factory.Sprite` in group list
    */
-  public getSprite(key: PIXIGroupKey): PIXISprite {
+  public get(key: PIXIGroupKey): PIXISprite {
     let item: Maybe<PIXISprite>;
 
     if (typeof key === 'string' && !this.__GROUP_KEY) {
@@ -293,7 +293,7 @@ export class SimpleGroup {
    */
   public delete(key: PIXIGroupKey) {
     if (this.__GROUP_KEY) {
-      const _sprite = this.getSprite(key as string);
+      const _sprite = this.get(key as string);
 
       this.list = this.list.filter((sprite: PIXISprite) => sprite.__GROUP_KEY !== (key as string));
       this.container.removeChild(_sprite);
@@ -301,7 +301,7 @@ export class SimpleGroup {
       _sprite.visible = false;
       _sprite?.destroy();
     } else {
-      const _sprite = this.getSprite(key as number);
+      const _sprite = this.get(key as number);
 
       this.list.splice(key as number, 1);
       this.container.removeChild(_sprite);
@@ -524,12 +524,12 @@ export class SimpleGroup {
 import { hitTestRectangle } from './contain';
  * // ...
  * function setup() {
- *  const sprite = Factory.Sprite.createGenericSprite(new PIXI.Sprite(resources.example.texture));
+ *  const sprite = Factory.Sprite.create(new PIXI.Sprite(resources.example.texture));
  *  const group = Factory.Group.create([ sprite ], { container: app.stage });
  *
  *  // or
  *
- *  const sprite = Factory.Sprite.createGenericSprite(new PIXI.Sprite(resources.example.texture));
+ *  const sprite = Factory.Sprite.create(new PIXI.Sprite(resources.example.texture));
  *  const group = Factory.Group.create([['foo', sprite]], { container: app.stage, key: true });
  * }
  * ```
@@ -546,12 +546,12 @@ export class PGroup {
    * import Factory from 'pixi-factory';
    * // ...
    * function setup() {
-   *  const sprite = Factory.Sprite.createGenericSprite(new PIXI.Sprite(resources.example.texture));
+   *  const sprite = Factory.Sprite.create(new PIXI.Sprite(resources.example.texture));
    *  const group = Factory.Group.create([ sprite ], { container: app.stage });
    *
    *  // or
    *
-   *  const sprite = Factory.Sprite.createGenericSprite(new PIXI.Sprite(resources.example.texture));
+   *  const sprite = Factory.Sprite.create(new PIXI.Sprite(resources.example.texture));
    *  const group = Factory.Group.create([['foo', sprite]], { container: app.stage, key: true });
    * }
    * ```
