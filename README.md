@@ -1,4 +1,4 @@
-# PIXI.JS Factory (WIP)
+# PIXI.JS Factory
 
 ![License Badge](https://img.shields.io/github/license/Novout/pixi-factory)
 
@@ -6,13 +6,23 @@ A superset for creating and handling Pixi.js resources
 
 - [Documentation is here](https://pixi-factory.vercel.app/)
 
+## Install
+
+````shell
+npm install pixi.js pixi-factory
+
+or
+
+yarn add pixi.js pixi-factory
+```
+
 ## Usage
 
 We recommend that you use `Factory.*` To avoid new method intentions, in addition to already containing everything that the library has.
 
 ### Sprite
 
-With `Factory.Sprite.*` or `new PSprite().*` create and handle sprites in a more coherent way and with new features.
+With `Factory.Sprite.*` or `new Sprite().*` create and handle sprites in a more coherent way and with new features.
 
 #### Creating a Generic Sprite
 
@@ -206,3 +216,4 @@ It would be necessary to extend directly from `PIXI.DisplayObject` in addition t
 ### Why not just use CDN, requiring installation of the package?
 
 Standardizing the packages and the way to use pixi.js can bring future benefits, especially while using webpack/snowpack. If necessary, clone this project and run `npm i && npm run build`, this generating a `index.js` module and other extensions in the `/lib` folder. Consulting `rollup.config.js` for other options.
+````
