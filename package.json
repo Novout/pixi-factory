@@ -2,10 +2,11 @@
   "name": "pixi-factory",
   "author": "Novout",
   "license": "MIT",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "A superset for creating and handling Pixi.js resources.",
-  "main": "lib/index.amd.js",
+  "main": "lib/index.cjs.js",
   "module": "lib/index.esm.js",
+  "bundle": "lib/index.iife.js",
   "types": "lib/index.d.ts",
   "contributors": [
     "Giovane Cardoso <gcnovout@gmail.com>"
@@ -14,6 +15,21 @@
     "type": "git",
     "url": "https://github.com/Novout/pixi-factory"
   },
+  "keywords": [
+    "factory",
+    "pixi.js",
+    "graphics",
+    "rendering",
+    "webgl"
+  ],
+  "files": [
+    "lib",
+    "package.json"
+  ],
+  "bugs": {
+    "url": "https://github.com/Novout/pixi-factory/issues"
+  },
+  "homepage": "https://pixi-factory-novout.vercel.app",
   "scripts": {
     "build": "rm -rf ./lib && rollup -c",
     "win:build": "rollup -c",
@@ -21,15 +37,9 @@
     "docs": "rm -rf ./docs && typedoc --options typedoc.json --theme ./node_modules/typedoc-neo-theme/bin/default",
     "win:docs": "typedoc --options typedoc.json --theme ./node_modules/typedoc-neo-theme/bin/default",
     "test": "jest",
-    "publish": "npm run build && npm publish"
+    "pub": "npm run build && npm publish",
+    "postpublish": "git push && git push --tags"
   },
-  "keywords": [
-    "pixi",
-    "pixijs",
-    "sprite",
-    "factory",
-    "typescript"
-  ],
   "dependencies": {
     "@types/gsap": "^1.20.2",
     "gsap": "^3.6.0"
@@ -70,10 +80,6 @@
     "typedoc-neo-theme": "^1.1.0",
     "typescript": "^4.1.3"
   },
-  "files": [
-    "lib",
-    "package.json"
-  ],
   "husky": {
     "hooks": {
       "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
