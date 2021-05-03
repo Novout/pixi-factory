@@ -274,6 +274,8 @@ export class SimpleGroup {
       (sprite as PIXISprite).__NUMBER_KEY = this.list.length - 1;
       this.list.push(sprite as PIXISprite);
     }
+
+    this.container.addChild(sprite)
   }
 
   /**

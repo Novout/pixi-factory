@@ -2,7 +2,7 @@
   "name": "pixi-factory",
   "author": "Novout",
   "license": "MIT",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "A superset for creating and handling Pixi.js resources.",
   "main": "lib/index.cjs.js",
   "module": "lib/index.esm.js",
@@ -29,7 +29,7 @@
   "bugs": {
     "url": "https://github.com/Novout/pixi-factory/issues"
   },
-  "homepage": "https://pixi-factory-novout.vercel.app",
+  "homepage": "https://novout.github.io/pixi-controller/",
   "scripts": {
     "build": "rm -rf ./lib && rollup -c",
     "win:build": "rollup -c",
