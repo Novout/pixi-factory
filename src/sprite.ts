@@ -70,7 +70,7 @@ export class PSprite {
    */
   public create(
     sprite: PIXIDefaultSprite,
-    { bump, velocity, d20rpg, content }: PIXISpriteOptions = {
+    { bump, velocity, d20rpg, critical, content }: PIXISpriteOptions = {
       bump: true,
       velocity: true,
     } as PIXISpriteOptions,
@@ -86,6 +86,7 @@ export class PSprite {
     if (bump) this.addCollisionProperties();
     if (velocity) this.addVelocityProperties();
     if (d20rpg) this.addOpenRPGProperties();
+    if (critical) this.addCriticalProperties();
 
     return this._sprite as PIXISprite;
   }
@@ -357,6 +358,25 @@ export class PSprite {
       } as PIXISpriteOpenRPG;
 
       this._sprite._d20RPGPropertiesAdded = true;
+    }
+
+    return this;
+  }
+
+  /**
+   * Add Critical System properties in local pixi-sprite
+   *
+   * @private
+   * @ignore
+   */
+  private addCriticalProperties(): this {
+    if (!this._sprite.control) {
+      this._sprite.control = {
+        players: [],
+        onlyGM: false,
+      };
+
+      this._sprite._criticalPropertiesAdded = true;
     }
 
     return this;

@@ -84,6 +84,11 @@ export interface PIXISprite extends PIXIDefaultSprite {
   /** A base properties */
   base?: PIXISpriteOpenRPG;
 
+  /** `true` hability critical properties
+   * @ignore
+   */
+  critical?: PIXISpriteCritical;
+
   /** `true` hability pixi-bump properties
    * @ignore
    */
@@ -104,6 +109,11 @@ export interface PIXISprite extends PIXIDefaultSprite {
    */
   _simpleGroupAdded?: boolean;
 
+  /** `true` hability critical control properties
+   * @ignore
+   */
+  _criticalPropertiesAdded?: boolean;
+
   /** a key at Factory.Group member
    * @ignore
    */
@@ -113,6 +123,11 @@ export interface PIXISprite extends PIXIDefaultSprite {
    * @ignore
    */
   __NUMBER_KEY?: number;
+}
+
+export interface PIXISpriteCritical {
+  players: Array<string>;
+  onlyGM?: boolean;
 }
 
 /**
@@ -188,6 +203,8 @@ export interface PIXISpriteOptions {
 
   /** `true` allows generic d20 system properties */
   d20rpg?: boolean;
+
+  critical?: boolean;
 
   /** `object to overflow and insert properties in sprite` */
   content?: Record<any, any>;

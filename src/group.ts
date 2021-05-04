@@ -275,7 +275,7 @@ export class SimpleGroup {
       this.list.push(sprite as PIXISprite);
     }
 
-    this.container.addChild(sprite)
+    this.container.addChild(sprite);
   }
 
   /**
@@ -334,6 +334,25 @@ export class SimpleGroup {
     } else {
       this.list.splice(key as number, 1);
     }
+  }
+
+  /**
+   * Get names key
+   *
+   * @returns Array with a name for keys
+   */
+  public names(): Array<string> {
+    if (!this.__GROUP_KEY) {
+      throw new Error('pixi-sprite: key as not enable, in this group, go through the options key: true');
+    }
+
+    const list: Array<string> = [];
+
+    this.list.forEach((item) => {
+      list.push(item.__GROUP_KEY as string);
+    });
+
+    return list;
   }
 
   /**
